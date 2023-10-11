@@ -12,7 +12,11 @@ public class Grupo7ProyectoFinalSC202 {
 
         //Menu principal 
         while (repetirMenu == true) {
-            String menuPrincipal = "Bienvenid@ a supermercados Los Pollitos\n\n1-Registro.\n2-Ver inventario.\n3-Registrar una venta.\n4-Salir.\n ";
+            String menuPrincipal = "Bienvenid@ a supermercados Los Pollitos\n"
+                    + "\n1-Registro."
+                    + "\n2-Ver inventario."
+                    + "\n3-Registrar una venta."
+                    + "\n4-Salir.\n ";
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menuPrincipal));
             switch (opcion) {
                 case 1: //Menu de registro
