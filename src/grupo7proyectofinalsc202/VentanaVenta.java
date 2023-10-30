@@ -6,15 +6,18 @@ package grupo7proyectofinalsc202;
 
 import javax.swing.JOptionPane;
 
-public class VentanaInventario {
+/**
+ *
+ * @author victo
+ */
+public class VentanaVenta {
 
     public void start() {
         int opcionInventario = 0;
         boolean repetirMenuInventario = true;
         while (repetirMenuInventario) {
-            String menuInventario = "Haz seleccionado Ver inventario\n\n"
-                    + "1.filtrar por categoria.\n"
-                    + "2.Mostrar inventario.\n"
+            String menuInventario = "Haz seleccionado registrar una venta\n\n"
+                    + "1.Seleccionar productos.\n"
                     + "3.Regresar.\n";
 
             opcionInventario = Integer.parseInt(JOptionPane.showInputDialog(menuInventario));

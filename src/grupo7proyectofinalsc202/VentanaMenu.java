@@ -40,9 +40,11 @@ public class VentanaMenu {
 
                     break;
 
-                    
+                
 
                 case 3: //Registrar una venta 
+                    VentanaVenta ventanaVenta = new VentanaVenta();
+                    ventanaVenta.start();
                     break;
 
                 case 4: //Salir del menu principal
