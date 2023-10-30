@@ -10,4 +10,15 @@ package grupo7proyectofinalsc202;
  */
 public class Producto {
     
+    private float precio;
+    private String nombre;
+    private String categoria;
+    private String marca;
+    private String fechaExp;
+    private boolean estadoVenta;
+    
+    public boolean estaCaducado(){
+          return false;
+    }
+          
 }

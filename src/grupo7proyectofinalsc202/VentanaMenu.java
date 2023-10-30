@@ -11,15 +11,12 @@ import javax.swing.JOptionPane;
  * @author victo
  */
 public class VentanaMenu {
-    
-    
-    public void start(){
-        
-        
+
+    public void start() {
+
         int opcion = 0;
-        
+
         boolean repetirMenu = true;
-       
 
         //Menu principal 
         while (repetirMenu == true) {
@@ -35,8 +32,15 @@ public class VentanaMenu {
                     ventanaRegistro.start();
                     break;
 
+                
                 case 2: //Ver Inventario 
+
+                    VentanaInventario ventanaInventario = new VentanaInventario();
+                    ventanaInventario.start();
+
                     break;
+
+                    
 
                 case 3: //Registrar una venta 
                     break;
