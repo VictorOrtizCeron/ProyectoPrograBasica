@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class VentanaInventario {
 
-    private String inventario;
+    private String inventario;//Van a ser arreglos
     private String Categorias;
     private String Marcas;
 

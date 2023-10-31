@@ -70,7 +70,7 @@ public class Producto {
         this.fechaExp = fechaExp;
     }
 
-    public boolean isEstadoVenta() {
+    public boolean getEstadoVenta() {
         return estadoVenta;
     }
 
