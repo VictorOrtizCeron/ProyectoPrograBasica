@@ -11,6 +11,10 @@ import javax.swing.JOptionPane;
  * @author victo
  */
 public class VentanaMenu {
+    
+    private String inventario;
+    private String Categorias;
+    private String Marcas;
 
     public void start() {
 
@@ -58,4 +62,29 @@ public class VentanaMenu {
             }
         }
     }
+
+    public String getInventario() {
+        return inventario;
+    }
+
+    public void setInventario(String inventario) {
+        this.inventario = inventario;
+    }
+
+    public String getCategorias() {
+        return Categorias;
+    }
+
+    public void setCategorias(String Categorias) {
+        this.Categorias = Categorias;
+    }
+
+    public String getMarcas() {
+        return Marcas;
+    }
+
+    public void setMarcas(String Marcas) {
+        this.Marcas = Marcas;
+    }
+    
 }

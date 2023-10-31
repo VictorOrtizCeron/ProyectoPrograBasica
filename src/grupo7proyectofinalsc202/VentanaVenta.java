@@ -12,21 +12,25 @@ import javax.swing.JOptionPane;
  */
 public class VentanaVenta {
 
+    private String inventario;
+    private String Categorias;
+    private String Marcas;
+
     public void start() {
         int opcionInventario = 0;
         boolean repetirMenuInventario = true;
         while (repetirMenuInventario) {
             String menuInventario = "Haz seleccionado registrar una venta\n\n"
                     + "1.Seleccionar productos.\n"
+                    + "2.Ir a checkout.\n"
                     + "3.Regresar.\n";
 
             opcionInventario = Integer.parseInt(JOptionPane.showInputDialog(menuInventario));
             switch (opcionInventario) { //Sub menu de registro
-                case 1: // FiltrarPorCartegoria.
+                case 1: // Seleccionar producto
 
                     break;
-
-                case 2: // MostrarInventario.
+                case 2: // Generar factura
 
                     break;
 
@@ -43,4 +47,18 @@ public class VentanaVenta {
             }
         }
     }
+
+    public String getInventario() {
+        return inventario;
+    }
+
+    public String getCategorias() {
+        return Categorias;
+    }
+
+    public String getMarcas() {
+        return Marcas;
+    }
+
+    
 }
