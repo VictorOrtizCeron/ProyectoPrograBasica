@@ -12,9 +12,11 @@ import javax.swing.JOptionPane;
  */
 public class VentanaMenu {
     
-    private String inventario;
-    private String Categorias;
-    private String Marcas;
+    Producto frijol = new Producto(200, "Frijoles Ducal", "Comida", "Ducal", "5nov2024", false);
+    Producto cereal = new Producto(400, "Nesquik", "Comida", "Nestle", "5nov2024", false);
+    private Producto[] inventario = {frijol,cereal};
+    private String[] Categorias;
+    private String[] Marcas;
 
     public void start() {
 
@@ -33,13 +35,26 @@ public class VentanaMenu {
             switch (opcion) {
                 case 1: //Menu de registro
                     VentanaRegistro ventanaRegistro = new VentanaRegistro();
+                    ventanaRegistro.setInventario(this.inventario);
+                    ventanaRegistro.setMarcas(this.Marcas);
+                    ventanaRegistro.setCategorias(this.Categorias);
+                    
                     ventanaRegistro.start();
+                    
+                    this.inventario = ventanaRegistro.getInventario();
+                    this.Marcas = ventanaRegistro.getMarcas();
+                    this.Categorias = ventanaRegistro.getCategorias();
+                    
+                    System.out.println(this.inventario[2].getNombre());
                     break;
 
                 
                 case 2: //Ver Inventario 
 
                     VentanaInventario ventanaInventario = new VentanaInventario();
+                    ventanaInventario.setMarcas(this.Marcas);
+                    ventanaInventario.setCategorias(this.Categorias);
+                    ventanaInventario.setInventario(this.inventario);
                     ventanaInventario.start();
 
                     break;

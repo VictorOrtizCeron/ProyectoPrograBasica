@@ -7,10 +7,9 @@ package grupo7proyectofinalsc202;
 import javax.swing.JOptionPane;
 
 public class VentanaInventario {
-    Producto frijol = new Producto(200, "Frijoles Ducal", "Comida", "Ducal", "5nov2024", false);
+    
 
-
-    private Producto[] inventario = {frijol};//Van a ser arreglos
+    private Producto[] inventario;//Van a ser arreglos
     private String[] Categorias;
     private String[] Marcas;
 
@@ -18,7 +17,7 @@ public class VentanaInventario {
         int opcionInventario = 0;
 
        
-        inventario[0] = frijol;
+        
         
         boolean repetirMenuInventario = true;
         while (repetirMenuInventario) {
@@ -29,7 +28,7 @@ public class VentanaInventario {
 
             opcionInventario = Integer.parseInt(JOptionPane.showInputDialog(menuInventario));
             switch (opcionInventario) { //Sub menu de registro
-                case 1: // FiltrarPorCategoria.
+                case 1: // Filtrar.
 
                     String input = JOptionPane.showInputDialog(null, "Escoja una marca");
                     break;

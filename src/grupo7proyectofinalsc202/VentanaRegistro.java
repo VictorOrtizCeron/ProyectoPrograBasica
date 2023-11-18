@@ -33,10 +33,12 @@ public class VentanaRegistro {
                     + "4-Regresar\n";
             opcionRegistro = Integer.parseInt(JOptionPane.showInputDialog(menuRegistro));
             switch (opcionRegistro) { //Sub menu de registro
+
                 case 1: // Registrar nuevos productos.
 
                     boolean repetirMenuRegistroProductos = true;
                     while (repetirMenuRegistroProductos) { //Ciclo para confirmar si quiere registrar o no el producto. 
+
                         String entradaNombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del producto\n");
                         String entradaMarca = JOptionPane.showInputDialog(null, "Ingrese la marca del prodcuto\n");
                         String entradaCategoria = JOptionPane.showInputDialog(null, "Ingrese la categoria\n");
@@ -60,9 +62,10 @@ public class VentanaRegistro {
                             case 1:
                                 JOptionPane.showMessageDialog(null, "Se ha registrado el producto con exito.");
                                 AgregarProducto(nuevoProducto);
+                                repetirMenuRegistroProductos = false;
                                 break;
                             case 2:
-                                repetirMenuRegistro = false;
+                                repetirMenuRegistroProductos = false;
                                 JOptionPane.showMessageDialog(null, "No se ha registrado el producto. Volviendo al menu principal...");
                                 break;
 
@@ -70,6 +73,7 @@ public class VentanaRegistro {
                                 JOptionPane.showMessageDialog(null, "¡Ups! opcion invalida, intentalo de nuevo.");
                                 break;
                         }
+                        break;
                     }
                     break;
 
@@ -96,7 +100,6 @@ public class VentanaRegistro {
 
                         case 2:
 
-                            
                             JOptionPane.showMessageDialog(null, "No se ha registrado la marca. Volviendo al menu principal...");
                             break;
 
@@ -124,8 +127,7 @@ public class VentanaRegistro {
                             break;
 
                         case 2:
-                            
-                            
+
                             JOptionPane.showMessageDialog(null, "No se ha registrado la categoria. Volviendo al menu principal...");
                             break;
 
@@ -145,8 +147,8 @@ public class VentanaRegistro {
                     JOptionPane.showMessageDialog(null, "¡Ups! opcion invalida, intentalo de nuevo.\n");
                     break;
 
-            }break;
-            
+            }
+            break;
         }
     }
 
