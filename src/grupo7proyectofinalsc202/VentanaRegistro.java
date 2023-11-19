@@ -164,7 +164,7 @@ public class VentanaRegistro {
 
     public boolean RegistrarCategoria(String nombreCategoria) {
 
-        for (int i = 0; i < Marcas.length; i++) {
+        for (int i = 0; i < Categorias.length; i++) {
             if (nombreCategoria.equals(this.Categorias[i])) {
                 return false;
             }

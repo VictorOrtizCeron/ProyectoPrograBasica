@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
  */
 public class VentanaMenu {
     
-    Producto frijol = new Producto(200, "Frijoles Ducal", "Comida", "Ducal", "5nov2024", false);
-    Producto cereal = new Producto(400, "Nesquik", "Comida", "Nestle", "5nov2024", false);
+    Producto frijol = new Producto(200, "Frijoles Ducal", "Comida enlatada", "Ducal", "5nov2024", false);
+    Producto cereal = new Producto(400, "Nesquik", "Cereales", "Nestle", "5nov2024", false);
     private Producto[] inventario = {frijol,cereal};
-    private String[] Categorias;
-    private String[] Marcas;
+    private String[] Categorias = {"Cereales","Comida enlatada"};
+    private String[] Marcas={"Ducal","Nestle"};
 
     public void start() {
 
@@ -26,6 +26,7 @@ public class VentanaMenu {
 
         //Menu principal 
         while (repetirMenu == true) {
+            
             String menuPrincipal = "Bienvenid@ a supermercados Los Pollitos\n"
                     + "\n1-Registro."
                     + "\n2-Ver inventario."
@@ -44,6 +45,7 @@ public class VentanaMenu {
                     this.inventario = ventanaRegistro.getInventario();
                     this.Marcas = ventanaRegistro.getMarcas();
                     this.Categorias = ventanaRegistro.getCategorias();
+                    
                     
                     System.out.println(this.inventario[2].getNombre());
                     break;
@@ -78,28 +80,46 @@ public class VentanaMenu {
         }
     }
 
-    public String getInventario() {
+    public Producto getFrijol() {
+        return frijol;
+    }
+
+    public void setFrijol(Producto frijol) {
+        this.frijol = frijol;
+    }
+
+    public Producto getCereal() {
+        return cereal;
+    }
+
+    public void setCereal(Producto cereal) {
+        this.cereal = cereal;
+    }
+
+    public Producto[] getInventario() {
         return inventario;
     }
 
-    public void setInventario(String inventario) {
+    public void setInventario(Producto[] inventario) {
         this.inventario = inventario;
     }
 
-    public String getCategorias() {
+    public String[] getCategorias() {
         return Categorias;
     }
 
-    public void setCategorias(String Categorias) {
+    public void setCategorias(String[] Categorias) {
         this.Categorias = Categorias;
     }
 
-    public String getMarcas() {
+    public String[] getMarcas() {
         return Marcas;
     }
 
-    public void setMarcas(String Marcas) {
+    public void setMarcas(String[] Marcas) {
         this.Marcas = Marcas;
     }
+
+    
     
 }
