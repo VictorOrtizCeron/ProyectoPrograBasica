@@ -14,14 +14,14 @@ public class VentanaMenu {
     
     Producto frijol = new Producto(200, "Frijoles Ducal", "Comida enlatada", "Ducal", "5nov2024", false);
     Producto cereal = new Producto(400, "Nesquik", "Cereales", "Nestle", "5nov2024", false);
-    private Producto[] inventario = {frijol,cereal};
+     Producto cereal2 = new Producto(500, "Zucaritas", "Cereales", "Kellogs", "5nov2024", false);
+    private Producto[] inventario = {frijol,cereal,cereal2};
     private String[] Categorias = {"Cereales","Comida enlatada"};
-    private String[] Marcas={"Ducal","Nestle"};
+    private String[] Marcas={"Ducal","Nestle","Kellogs"};
 
     public void start() {
 
         int opcion = 0;
-
         boolean repetirMenu = true;
 
         //Menu principal 

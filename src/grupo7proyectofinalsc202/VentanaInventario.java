@@ -19,77 +19,76 @@ public class VentanaInventario {
         while (repetirMenuInventario) {
             String menuInventario = "Haz seleccionado Ver inventario\n\n"
                     + concatenarInventario(this.inventario) + "\n"
-                    + "1.Filtrar por categoría.\n"
-                    + "2.Filtrar por marca.\n"
-                    + "3.Regresar.\n";
+                    + "1.Filtrar .\n"
+                    + "2.Regresar.\n";
 
             opcionInventario = Integer.parseInt(JOptionPane.showInputDialog(menuInventario));
             switch (opcionInventario) {
-                case 1: // Filtrar por categoría.
-                    String listaCategorias = "";
+                case 1:
+                    //Primero filtra por categoría
+                    String subMenuCategorias
+                            = "Categorias disponibles\n"
+                            + concatenarArregloString(this.Categorias) + "\n"
+                            + (this.Categorias.length + 1) + ". Regresar"
+                            + "\nSeleccione una categoría\n";
 
-                    for (int i = 0; i < this.Categorias.length; i++) {
-                        listaCategorias += (i + 1) + ". " + Categorias[i] + "\n";
-                    }
-                    listaCategorias += (Categorias.length + 1) + ". Regresar";
-                    int categoriaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(null, "Categorías disponibles:\n" + listaCategorias + "\n" + "Seleccione una categoría"));
+                    int categoriaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(subMenuCategorias));
 
-                    if (categoriaSeleccionada == Categorias.length + 1) {
-                        //no hace nada
-                    } else {
-                        String nombreCategoriaSeleccionada = this.Categorias[categoriaSeleccionada - 1];
+                    if (categoriaSeleccionada < Categorias.length+1 && categoriaSeleccionada > 0) {
 
-                        String inventarioFiltradoCategoria = "";
+                        Producto[] filtradoCategoria = filtradoCategoria(this.Categorias[categoriaSeleccionada - 1], this.inventario);
 
-                        for (int i = 0; i < inventario.length; i++) {
-                            int j = 1;
-                            if (nombreCategoriaSeleccionada.equals(inventario[i].getCategoria())) {
-                                inventarioFiltradoCategoria += +j + ". " + inventario[i].getNombre() + "\n";
-                                j++;
-                            }
+                        String menuFiltradoPorCategoria = "Resultados de filtrado por Categoría\n\n"
+                                + concatenarInventario(filtradoCategoria) + "\n"
+                                + "1. Filtrar por marca.\n"
+                                + "2. Regresar.\n";
+
+                        int opcionSubMenu = Integer.parseInt(JOptionPane.showInputDialog(menuFiltradoPorCategoria));
+
+                        switch (opcionSubMenu) {
+
+                            case 1:
+                                
+                                String marcasConcatenacion = "Marcas registradas: \n"+
+                                        concatenarArregloString(this.Marcas)+
+                                        "\nSeleccione una de las marcas disponibles";
+                                
+                                
+                                int marcaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(marcasConcatenacion));
+                                
+                                if (marcaSeleccionada < Marcas.length+1 && marcaSeleccionada > 0) {
+                                    Producto[] filtradoMarca = filtradoMarca(this.Marcas[marcaSeleccionada - 1], filtradoCategoria);
+
+                                    String menuFiltradoFinal = "Resultados de filtrado por categoría y marca\n\n"
+                                            + concatenarInventario(filtradoMarca) + "\n";
+                                    
+                                    JOptionPane.showMessageDialog(null,menuFiltradoFinal);
+                                   
+                                    
+                                } else if (marcaSeleccionada == Marcas.length+1) {
+                                     repetirMenuInventario = false;
+                                    
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Ingrese una opción válida");
+                                }
+                                break;
+                            
+                            case 2:
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(null,"Opción inválida");
+                                break;
                         }
-                        JOptionPane.showMessageDialog(null, "Productos filtrados por categoría: "
-                                + nombreCategoriaSeleccionada + "\n"
-                                + inventarioFiltradoCategoria
-                        );
+                       
+                    } else if (categoriaSeleccionada == Categorias.length + 1) {
 
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ingrese una opción válida");
                     }
+
                     break;
 
-                case 2: // Filtrar por marca.
-                    String listaMarcas = "";
-
-                    for (int i = 0; i < this.Marcas.length; i++) {
-                        listaMarcas += (i + 1) + ". " + Marcas[i] + "\n";
-                    }
-                    listaMarcas += (Marcas.length + 1) + ". Regresar";
-                    int marcaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(null, "Marcas disponibles:\n" + listaMarcas + "\n" + "Seleccione una marca"));
-
-                    if (marcaSeleccionada == Marcas.length + 1) {
-                        //no hace nada
-                    } else {
-                        String nombreMarcaSeleccionada = this.Marcas[marcaSeleccionada - 1];
-
-                        String inventarioFiltradoMarca = "";
-
-                        for (int i = 0; i < inventario.length; i++) {
-                            int j = 1;
-                            if (nombreMarcaSeleccionada.equals(inventario[i].getMarca())) {
-                                inventarioFiltradoMarca += +j + ". " + inventario[i].getNombre() + "\n";
-                                j++;
-                            }
-                        }
-                        JOptionPane.showMessageDialog(null, "Productos filtrados por marca: "
-                                + nombreMarcaSeleccionada + "\n"
-                                + inventarioFiltradoMarca
-                        );
-                        repetirMenuInventario = false;
-
-                    }
-
-                    break;
-
-                case 3: // Regresar.
+                case 2: // Regresar.
                     repetirMenuInventario = false;
                     JOptionPane.showMessageDialog(null, "Volviendo al menú principal...");
                     break;
@@ -101,18 +100,74 @@ public class VentanaInventario {
         }
     }
 
-    public String concatenarInventario(Producto[] inventario) {
+    public Producto[] filtradoCategoria(String filtro, Producto[] listaProductos) {
+        Producto[] inventarioFiltrado = new Producto[0];
+
+        for (int i = 0; i < listaProductos.length; i++) {
+            if (listaProductos[i].getCategoria().equals(filtro)) {
+                inventarioFiltrado = agregarElemento(listaProductos[i], inventarioFiltrado);
+            }
+        }
+        return inventarioFiltrado;
+    }
+
+    public Producto[] filtradoMarca(String filtro, Producto[] listaProductos) {
+        Producto[] inventarioFiltrado = new Producto[0];
+
+        for (int i = 0; i < listaProductos.length; i++) {
+            if (listaProductos[i].getMarca().equals(filtro)) {
+                inventarioFiltrado = agregarElemento(listaProductos[i], inventarioFiltrado);
+            }
+        }
+        return inventarioFiltrado;
+    }
+
+    public Producto[] agregarElemento(Producto productoAgregar, Producto[] productosOriginal) {
+
+        int limite = productosOriginal.length;
+        Producto[] productosNuevo = new Producto[limite + 1];
+
+        for (int i = 0; i < limite; i++) {
+            productosNuevo[i] = productosOriginal[i];
+
+        }
+
+        productosNuevo[limite] = productoAgregar;
+        return productosNuevo;
+    }
+
+    public String concatenarInventario(Producto[] productos) {
         String inventarioString = "";
 
-        if (inventario.length != 0) {
-            for (int i = 0; i < inventario.length; i++) {
+        if (productos.length != 0) {
+            for (int i = 0; i < productos.length; i++) {
 
-                inventarioString = inventarioString + "\n " + inventario[i].getNombre();
+                inventarioString = inventarioString
+                        + "\n Nombre:   "
+                        + productos[i].getNombre()
+                        + "\nCategoría: "
+                        + productos[i].getCategoria()
+                        + "\nMarca:     "
+                        + productos[i].getMarca() + "\n";
             }
         } else {
-            inventarioString = "Inventario vacío";
+            inventarioString = "vacío";
         }
         return inventarioString;
+    }
+
+    public String concatenarArregloString(String[] arreglo) {
+        String arregloString = "";
+
+        if (arreglo.length != 0) {
+            for (int i = 0; i < arreglo.length; i++) {
+
+                arregloString = arregloString + "\n " + (i + 1) + ". " + arreglo[i];
+            }
+        } else {
+            arregloString = "vacío";
+        }
+        return arregloString;
     }
 
     public Producto[] getInventario() {
