@@ -43,9 +43,9 @@ public class VentanaInventario {
                                 + "1. Filtrar por marca.\n"
                                 + "2. Regresar.\n";
 
-                        int opcionSubMenu = Integer.parseInt(JOptionPane.showInputDialog(menuFiltradoPorCategoria));
+                        int opcionSubMenuMarcas = Integer.parseInt(JOptionPane.showInputDialog(menuFiltradoPorCategoria));
 
-                        switch (opcionSubMenu) {
+                        switch (opcionSubMenuMarcas) {
 
                             case 1:
                                 

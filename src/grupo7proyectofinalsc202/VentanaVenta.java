@@ -12,9 +12,9 @@ import javax.swing.JOptionPane;
  */
 public class VentanaVenta {
 
-    private String inventario;
-    private String Categorias;
-    private String Marcas;
+    private Producto[] inventario;
+    private String[] Categorias;
+    private String[] Marcas;
 
     public void start() {
         int opcionInventario = 0;
@@ -48,17 +48,31 @@ public class VentanaVenta {
         }
     }
 
-    public String getInventario() {
+    public Producto[] getInventario() {
         return inventario;
     }
 
-    public String getCategorias() {
+    public void setInventario(Producto[] inventario) {
+        this.inventario = inventario;
+    }
+
+    public String[] getCategorias() {
         return Categorias;
     }
 
-    public String getMarcas() {
+    public void setCategorias(String[] Categorias) {
+        this.Categorias = Categorias;
+    }
+
+    public String[] getMarcas() {
         return Marcas;
     }
+
+    public void setMarcas(String[] Marcas) {
+        this.Marcas = Marcas;
+    }
+
+    
 
     
 }
