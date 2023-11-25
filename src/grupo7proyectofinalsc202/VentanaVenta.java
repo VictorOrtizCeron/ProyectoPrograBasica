@@ -28,6 +28,8 @@ public class VentanaVenta {
             opcionInventario = Integer.parseInt(JOptionPane.showInputDialog(menuInventario));
             switch (opcionInventario) { //Sub menu de registro
                 case 1: // Seleccionar producto
+                    
+                    
 
                     break;
                 case 2: // Generar factura

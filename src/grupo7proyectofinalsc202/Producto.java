@@ -14,8 +14,8 @@ public class Producto {
     private String nombre;
     private String categoria;
     private String marca;
-    private String fechaExp;
-    private boolean estadoVenta;
+    private String fechaExp;//opcional
+    private boolean estadoVenta;//opcional
     
     public boolean estaCaducado(){
           return false;

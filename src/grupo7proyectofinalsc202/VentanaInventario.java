@@ -25,19 +25,23 @@ public class VentanaInventario {
             opcionInventario = Integer.parseInt(JOptionPane.showInputDialog(menuInventario));
             switch (opcionInventario) {
                 case 1:
-                    //Primero filtra por categoría
+                    //string del menu de categorias disponibles
                     String subMenuCategorias
                             = "Categorias disponibles\n"
                             + concatenarArregloString(this.Categorias) + "\n"
                             + (this.Categorias.length + 1) + ". Regresar"
                             + "\nSeleccione una categoría\n";
-
+                    
+                    //seleccion de categoria
                     int categoriaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(subMenuCategorias));
-
+                    
+                    //validación de categoria seleccionada
                     if (categoriaSeleccionada < Categorias.length+1 && categoriaSeleccionada > 0) {
-
+                        
+                        //arreglo de productos filtrados por categoria
                         Producto[] filtradoCategoria = filtradoCategoria(this.Categorias[categoriaSeleccionada - 1], this.inventario);
-
+                        
+                        //lista de productos filtrados desplegada
                         String menuFiltradoPorCategoria = "Resultados de filtrado por Categoría\n\n"
                                 + concatenarInventario(filtradoCategoria) + "\n"
                                 + "1. Filtrar por marca.\n"
@@ -51,14 +55,15 @@ public class VentanaInventario {
                                 
                                 String marcasConcatenacion = "Marcas registradas: \n"+
                                         concatenarArregloString(this.Marcas)+
-                                        "\nSeleccione una de las marcas disponibles";
+                                        "\nSeleccione una de las marcas disponibles\n"+
+                                        (this.Marcas.length+1)+". Regresar";
                                 
                                 
                                 int marcaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(marcasConcatenacion));
                                 
                                 if (marcaSeleccionada < Marcas.length+1 && marcaSeleccionada > 0) {
                                     Producto[] filtradoMarca = filtradoMarca(this.Marcas[marcaSeleccionada - 1], filtradoCategoria);
-
+                                    
                                     String menuFiltradoFinal = "Resultados de filtrado por categoría y marca\n\n"
                                             + concatenarInventario(filtradoMarca) + "\n";
                                     

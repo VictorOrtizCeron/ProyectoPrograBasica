@@ -40,8 +40,43 @@ public class VentanaRegistro {
                     while (repetirMenuRegistroProductos) { //Ciclo para confirmar si quiere registrar o no el producto. 
 
                         String entradaNombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del producto\n");
-                        String entradaMarca = JOptionPane.showInputDialog(null, "Ingrese la marca del prodcuto\n");
-                        String entradaCategoria = JOptionPane.showInputDialog(null, "Ingrese la categoria\n");
+
+                        boolean validarMarca = false;
+
+                        String entradaMarca = "";
+
+                        while (!validarMarca) {
+                            String marcaTemp = JOptionPane.showInputDialog(null, "Ingrese la marca del producto\n");
+
+                            validarMarca = existeMarca(marcaTemp);
+
+                            if (!validarMarca) {
+
+                                JOptionPane.showMessageDialog(null, "Marca inexistente, intentelo nuevamente");
+                                
+                            } else {
+                                entradaMarca = marcaTemp;
+                            }
+
+                        }
+
+                        //validar
+                        boolean validarCategoria = false;
+
+                        String entradaCategoria = "";
+
+                        while (!validarCategoria) {
+                            String categoriaTemp = JOptionPane.showInputDialog(null, "Ingrese la categoria\n");
+                            validarCategoria = existeCategoria(categoriaTemp);
+                            if (!validarCategoria) {
+
+                                JOptionPane.showMessageDialog(null, "Marca inexistente, intentelo nuevamente");
+                            } else {
+                                entradaCategoria = categoriaTemp;
+                            }
+
+                        }
+
                         String entradaFechaExp = JOptionPane.showInputDialog("Ingrese la fecha de expiración\n");
                         float entradaPrecio = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingrese el precio del producto\n"));
                         boolean estadoVentaAgregar = false;
@@ -74,6 +109,7 @@ public class VentanaRegistro {
                                 break;
                         }
                         break;
+
                     }
                     break;
 
@@ -91,7 +127,7 @@ public class VentanaRegistro {
                             boolean resultadoMarcaAgregar = RegistrarMarca(nombreMarca);
                             if (resultadoMarcaAgregar) {
                                 JOptionPane.showMessageDialog(null, "Se ha registrado la marca con exito.");
-                                System.out.println(this.Marcas[0]);
+
                                 break;
                             } else {
                                 JOptionPane.showMessageDialog(null, "No se logró registrar la marca, verifique que los datos sean válidos.");
@@ -118,7 +154,7 @@ public class VentanaRegistro {
                             boolean resultadoCategoriaAgregar = RegistrarCategoria(nombreCategoria);
 
                             if (resultadoCategoriaAgregar) {
-                                System.out.println(this.Categorias[0]);
+
                                 JOptionPane.showMessageDialog(null, "Se ha registrado la categoría con exito.");
                             } else {
                                 JOptionPane.showMessageDialog(null, "No se logró registrar la categoría, verifique que los datos sean válidos.");
@@ -150,6 +186,26 @@ public class VentanaRegistro {
             }
             break;
         }
+    }
+
+    public boolean existeMarca(String marca) {
+
+        for (int i = 0; i < Marcas.length; i++) {
+            if (marca.equals(this.Marcas[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean existeCategoria(String categoria) {
+
+        for (int i = 0; i < Categorias.length; i++) {
+            if (categoria.equals(this.Categorias[i])) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void AgregarProducto(Producto nuevoProducto) {
