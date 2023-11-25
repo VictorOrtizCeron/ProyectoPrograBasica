@@ -17,7 +17,8 @@ public class VentanaMenu {
     Producto cereal2 = new Producto(500, "Zucaritas", "Cereales", "Kellogs", "5nov2024", false);
     private Producto[] inventario = {frijol,cereal,cereal2};
     private String[] Categorias = {"Cereales","Comida enlatada"};
-    private String[] Marcas={"Ducal","Nestle","Kellogs"};
+    private String[] Marcas={};
+    //"Ducal","Nestle","Kellogs"
 
     public void start() {
 

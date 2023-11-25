@@ -39,77 +39,66 @@ public class VentanaRegistro {
                     boolean repetirMenuRegistroProductos = true;
                     while (repetirMenuRegistroProductos) { //Ciclo para confirmar si quiere registrar o no el producto. 
 
-                        String entradaNombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del producto\n");
+                        if (Categorias.length == 0 || Marcas.length == 0) {
 
-                        boolean validarMarca = false;
+                            JOptionPane.showMessageDialog(null, "No hay categorias o marcas registradas");
+                            repetirMenuRegistroProductos = false;
+                            
+                            
+                            
 
-                        String entradaMarca = "";
+                        } else {
+                            String entradaNombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del producto\n");
 
-                        while (!validarMarca) {
-                            String marcaTemp = JOptionPane.showInputDialog(null, "Ingrese la marca del producto\n");
+                            String entradaMarca = "";
 
-                            validarMarca = existeMarca(marcaTemp);
+                            String mensajeMarcas
+                                    = "Marcas disponibles\n"
+                                    + concatenarArregloString(this.Marcas)
+                                    + "\nSeleccione la marca del producto\n";
+                            String marcaTemp = JOptionPane.showInputDialog(null, mensajeMarcas);
 
-                            if (!validarMarca) {
+                            //validar
+                            boolean validarCategoria = false;
 
-                                JOptionPane.showMessageDialog(null, "Marca inexistente, intentelo nuevamente");
-                                
-                            } else {
-                                entradaMarca = marcaTemp;
-                            }
+                            String entradaCategoria = "";
 
-                        }
-
-                        //validar
-                        boolean validarCategoria = false;
-
-                        String entradaCategoria = "";
-
-                        while (!validarCategoria) {
                             String categoriaTemp = JOptionPane.showInputDialog(null, "Ingrese la categoria\n");
-                            validarCategoria = existeCategoria(categoriaTemp);
-                            if (!validarCategoria) {
 
-                                JOptionPane.showMessageDialog(null, "Marca inexistente, intentelo nuevamente");
-                            } else {
-                                entradaCategoria = categoriaTemp;
+                            String entradaFechaExp = JOptionPane.showInputDialog("Ingrese la fecha de expiración\n");
+                            float entradaPrecio = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingrese el precio del producto\n"));
+                            boolean estadoVentaAgregar = false;
+
+                            //SE CREA EL OBJETO PRODUCTO
+                            Producto nuevoProducto = new Producto(
+                                    entradaPrecio,
+                                    entradaNombre,
+                                    entradaCategoria,
+                                    entradaMarca,
+                                    entradaFechaExp,
+                                    estadoVentaAgregar);
+
+                            //CONFIRMACION DE CREACION
+                            String confirmarCreacionProducto = "Esta seguro de que desea registrar este producto?\n1- Si.\n2-No.\n\n";
+                            opcionRegistrarProductos = Integer.parseInt(JOptionPane.showInputDialog(null, confirmarCreacionProducto));
+                            switch (opcionRegistrarProductos) {
+                                case 1:
+                                    JOptionPane.showMessageDialog(null, "Se ha registrado el producto con exito.");
+                                    AgregarProducto(nuevoProducto);
+                                    repetirMenuRegistroProductos = false;
+                                    break;
+                                case 2:
+                                    repetirMenuRegistroProductos = false;
+                                    JOptionPane.showMessageDialog(null, "No se ha registrado el producto. Volviendo al menu principal...");
+                                    break;
+
+                                default://Opcion invalida 
+                                    JOptionPane.showMessageDialog(null, "¡Ups! opcion invalida, intentalo de nuevo.");
+                                    break;
                             }
-
+                           
                         }
-
-                        String entradaFechaExp = JOptionPane.showInputDialog("Ingrese la fecha de expiración\n");
-                        float entradaPrecio = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingrese el precio del producto\n"));
-                        boolean estadoVentaAgregar = false;
-
-                        //SE CREA EL OBJETO PRODUCTO
-                        Producto nuevoProducto = new Producto(
-                                entradaPrecio,
-                                entradaNombre,
-                                entradaCategoria,
-                                entradaMarca,
-                                entradaFechaExp,
-                                estadoVentaAgregar);
-
-                        //CONFIRMACION DE CREACION
-                        String confirmarCreacionProducto = "Esta seguro de que desea registrar este producto?\n1- Si.\n2-No.\n\n";
-                        opcionRegistrarProductos = Integer.parseInt(JOptionPane.showInputDialog(null, confirmarCreacionProducto));
-                        switch (opcionRegistrarProductos) {
-                            case 1:
-                                JOptionPane.showMessageDialog(null, "Se ha registrado el producto con exito.");
-                                AgregarProducto(nuevoProducto);
-                                repetirMenuRegistroProductos = false;
-                                break;
-                            case 2:
-                                repetirMenuRegistroProductos = false;
-                                JOptionPane.showMessageDialog(null, "No se ha registrado el producto. Volviendo al menu principal...");
-                                break;
-
-                            default://Opcion invalida 
-                                JOptionPane.showMessageDialog(null, "¡Ups! opcion invalida, intentalo de nuevo.");
-                                break;
-                        }
-                        break;
-
+                       
                     }
                     break;
 
@@ -184,28 +173,21 @@ public class VentanaRegistro {
                     break;
 
             }
-            break;
         }
     }
 
-    public boolean existeMarca(String marca) {
+    public String concatenarArregloString(String[] arreglo) {
+        String arregloString = "";
 
-        for (int i = 0; i < Marcas.length; i++) {
-            if (marca.equals(this.Marcas[i])) {
-                return true;
+        if (arreglo.length != 0) {
+            for (int i = 0; i < arreglo.length; i++) {
+
+                arregloString = arregloString + "\n " + (i + 1) + ". " + arreglo[i];
             }
+        } else {
+            arregloString = "vacío";
         }
-        return false;
-    }
-
-    public boolean existeCategoria(String categoria) {
-
-        for (int i = 0; i < Categorias.length; i++) {
-            if (categoria.equals(this.Categorias[i])) {
-                return true;
-            }
-        }
-        return false;
+        return arregloString;
     }
 
     public void AgregarProducto(Producto nuevoProducto) {
