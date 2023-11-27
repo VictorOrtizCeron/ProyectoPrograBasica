@@ -1,24 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package grupo7proyectofinalsc202;
-
 import javax.swing.JOptionPane;
-
-/**
- *
- * @author victo
- */
 public class VentanaMenu {
-    
-    Producto frijol = new Producto(200, "Frijoles Ducal", "Comida enlatada", "Ducal", "5nov2024", false);
-    Producto cereal = new Producto(400, "Nesquik", "Cereales", "Nestle", "5nov2024", false);
-    Producto cereal2 = new Producto(500, "Zucaritas", "Cereales", "Kellogs", "5nov2024", false);
-    private Producto[] inventario = {frijol,cereal,cereal2};
-    private String[] Categorias = {"Cereales","Comida enlatada"};
-    private String[] Marcas={};
-    //"Ducal","Nestle","Kellogs"
+//    Producto frijol = new Producto(200, "Frijoles Ducal", "Comida enlatada", "Ducal", "5nov2024", false);
+//    Producto cereal = new Producto(400, "Nesquik", "Cereales", "Nestle", "5nov2024", false);
+//    Producto cereal2 = new Producto(500, "Zucaritas", "Cereales", "Kellogs", "5nov2024", false);
+    private Producto[] inventario = {}; //frijol, cereal, cereal2
+    private String[] Categorias = {}; //"Cereales", "Comida enlatada"
+    private String[] Marcas = {}; //"Ducal","Nestle","Kellogs"
+
 
     public void start() {
 
@@ -27,32 +16,29 @@ public class VentanaMenu {
 
         //Menu principal 
         while (repetirMenu == true) {
-            
-            String menuPrincipal = "Bienvenid@ a supermercados Los Pollitos\n"
+
+            String menuPrincipal = "─────── ⋆⋅⋆  ────────Bienvenid@ a supermercados Los Pollitos ─────── ⋆⋅⋆  ────────\n"
                     + "\n1-Registro."
                     + "\n2-Ver inventario."
                     + "\n3-Registrar una venta."
                     + "\n4-Salir.\n ";
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menuPrincipal));
             switch (opcion) {
-                case 1: //Menu de registro
+                case 1: //VER MENU REGISTRO
                     VentanaRegistro ventanaRegistro = new VentanaRegistro();
                     ventanaRegistro.setInventario(this.inventario);
                     ventanaRegistro.setMarcas(this.Marcas);
                     ventanaRegistro.setCategorias(this.Categorias);
-                    
+
                     ventanaRegistro.start();
-                    
+
                     this.inventario = ventanaRegistro.getInventario();
                     this.Marcas = ventanaRegistro.getMarcas();
                     this.Categorias = ventanaRegistro.getCategorias();
-                    
-                    
-                    
-                    break;
 
-                
-                case 2: //Ver Inventario 
+                    break; // break del case 1
+
+                case 2: //VER INVENTARIO
 
                     VentanaInventario ventanaInventario = new VentanaInventario();
                     ventanaInventario.setMarcas(this.Marcas);
@@ -60,42 +46,40 @@ public class VentanaMenu {
                     ventanaInventario.setInventario(this.inventario);
                     ventanaInventario.start();
 
-                    break;
+                    break; // break del case 2
 
-                
-
-                case 3: //Registrar una venta 
+                case 3: //REGISTRAR UNA VENTA
                     VentanaVenta ventanaVenta = new VentanaVenta();
                     ventanaVenta.start();
-                    break;
+                    break; // break del case 3
 
-                case 4: //Salir del menu principal
+                case 4: //SALIR AL MENU PRICIPAL
                     repetirMenu = false;
-                    JOptionPane.showMessageDialog(null, "Hasta luego, cerrando sistema.");
-                    break;
+                    JOptionPane.showMessageDialog(null, "Saliendo del sistema (_ _ ) . . z Z");
+                    break; // break del case 4
 
                 default: //Opcion invalida 
-                    JOptionPane.showMessageDialog(null, "Lo siento, opcion invalida, intentalo de nuevo.");
+                    JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
 
             }
         }
     }
 
-    public Producto getFrijol() {
-        return frijol;
-    }
-
-    public void setFrijol(Producto frijol) {
-        this.frijol = frijol;
-    }
-
-    public Producto getCereal() {
-        return cereal;
-    }
-
-    public void setCereal(Producto cereal) {
-        this.cereal = cereal;
-    }
+//    public Producto getFrijol() {
+//        return frijol;
+//    }
+//
+//    public void setFrijol(Producto frijol) {
+//        this.frijol = frijol;
+//    }
+//
+//    public Producto getCereal() {
+//        return cereal;
+//    }
+//
+//    public void setCereal(Producto cereal) {
+//        this.cereal = cereal;
+//    }
 
     public Producto[] getInventario() {
         return inventario;
@@ -121,6 +105,4 @@ public class VentanaMenu {
         this.Marcas = Marcas;
     }
 
-    
-    
 }

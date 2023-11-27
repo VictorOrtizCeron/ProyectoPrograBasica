@@ -1,15 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package grupo7proyectofinalsc202;
-
 import javax.swing.JOptionPane;
-
-/**
- *
- * @author victo
- */
 public class VentanaRegistro {
 
     //ATRIBUTOS
@@ -20,13 +10,13 @@ public class VentanaRegistro {
 
     //MENU DE LA OPCION REGISTRO.
     public void start() {
-        int opcionRegistro = 0;
-        int opcionRegistrarProductos = 0;
-        int opcionRegistrarMarca = 0;
-        int opcionRegistrarCategoria = 0;
+        int opcionRegistro;
+        int opcionRegistrarProductos;
+        int opcionRegistrarMarca;
+        int opcionRegistrarCategoria;
         boolean repetirMenuRegistro = true;
         while (repetirMenuRegistro) {
-            String menuRegistro = "Haz seleccionado registro\n\n"
+            String menuRegistro = "─────── ⋆⋅⋆  ───────Menu registro─────── ⋆⋅⋆  ───────\n\n"
                     + "1-Registrar nuevos productos.\n"
                     + "2-Registrar una marca.\n"
                     + "3-Registrar una categoria.\n"
@@ -34,85 +24,89 @@ public class VentanaRegistro {
             opcionRegistro = Integer.parseInt(JOptionPane.showInputDialog(menuRegistro));
             switch (opcionRegistro) { //Sub menu de registro
 
-                case 1: // Registrar nuevos productos.
-
+                case 1: // REGISTRAR NUEVOS PRODUCTOS
+                    
                     boolean repetirMenuRegistroProductos = true;
                     while (repetirMenuRegistroProductos) { //Ciclo para confirmar si quiere registrar o no el producto. 
-
-                        if (Categorias.length == 0 || Marcas.length == 0) {
-
-                            JOptionPane.showMessageDialog(null, "No hay categorias o marcas registradas");
+                        //Validar existencia de productos o marcas.
+                        if (Categorias.length == 0 || Marcas.length == 0) { //Si no existen
+                            JOptionPane.showMessageDialog(null, "No hay categorias o marcas registradas\n\n                            ˙◠˙    \n\n    Debes registrar ambas primero.");
                             repetirMenuRegistroProductos = false;
-                            
-                            
-                            
 
-                        } else {
-                            String entradaNombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del producto\n");
-
+                        } else { //Si si existen entonces se procede con el registro del producto. 
+                            String entradaNombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del producto.\n");
+                            //Elegir la marca
                             String entradaMarca = "";
-
                             String mensajeMarcas
-                                    = "Marcas disponibles\n"
+                                    = "─────── ⋆ ─────── Marcas disponibles ─────── ⋆ ───────\n"
                                     + concatenarArregloString(this.Marcas)
                                     + "\nSeleccione la marca del producto\n";
-                            String marcaTemp = JOptionPane.showInputDialog(null, mensajeMarcas);
+                            int seleccionMarca = Integer.parseInt(JOptionPane.showInputDialog(null, mensajeMarcas));
+                            //Recorrer el arreglo para almacenar la marca seleccion en el registro del nuevo producto
+                            if (seleccionMarca <= this.Marcas.length + 1 && seleccionMarca > 0) {
+                                String marcaSeleccionada = this.Marcas[seleccionMarca - 1];
+                                
+                                //Escoger categoria
+                                boolean validarCategoria = false;
+                                String entradaCategoria = "";
+                                String mensajeCategoria
+                                        = "─────── ⋆ ─────── Categorias disponibles ─────── ⋆ ───────\n"
+                                        + concatenarArregloString(this.Categorias)
+                                        + "\nSeleccione la categoria del producto\n";
+                                int seleccionCategoria = Integer.parseInt(JOptionPane.showInputDialog(null, mensajeCategoria));
+                                //Recorrer el arreglo para almacenar la categoria seleccion en el registro del nuevo producto.
+                                if (seleccionCategoria <= this.Categorias.length + 1 && seleccionCategoria > 0) {
+                                    String categoriaSeleccionada = this.Categorias[seleccionCategoria - 1];
 
-                            //validar
-                            boolean validarCategoria = false;
+                                    
+                                    //Digitar la fecha de expiracion
+                                    String entradaFechaExp = JOptionPane.showInputDialog("Ingrese la fecha de expiración.\n");
+                                    //Digitar el precio
+                                    float entradaPrecio = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingrese el precio del producto.\n"));
+                                    boolean estadoVentaAgregar = false;
+                                    
+                                    
+                                    //SE CREA EL OBJETO PRODUCTO
+                                    Producto nuevoProducto = new Producto(
+                                            entradaPrecio,
+                                            entradaNombre,
+                                            categoriaSeleccionada,
+                                            marcaSeleccionada,
+                                            entradaFechaExp,
+                                            estadoVentaAgregar);
 
-                            String entradaCategoria = "";
+                                    //CONFIRMACION DE CREACION
+                                    String confirmarCreacionProducto = "¿Esta seguro de que desea registrar este producto?\n1- Si.\n2-No.\n\n";
+                                    opcionRegistrarProductos = Integer.parseInt(JOptionPane.showInputDialog(null, confirmarCreacionProducto));
+                                    switch (opcionRegistrarProductos) {
+                                        case 1:
+                                            JOptionPane.showMessageDialog(null, "¡Se ha registrado el producto con exito!");
+                                            AgregarProducto(nuevoProducto);
+                                            repetirMenuRegistroProductos = false;
+                                            break; // break del case 1
+                                        case 2:
+                                            repetirMenuRegistroProductos = false;
+                                            JOptionPane.showMessageDialog(null, "No se ha registrado el producto. Volviendo al menu principal...");
+                                            break;// break del case 2
 
-                            String categoriaTemp = JOptionPane.showInputDialog(null, "Ingrese la categoria\n");
+                                        default://Opcion invalida 
+                                            JOptionPane.showMessageDialog(null, "¡Ups! opcion invalida, intentalo de nuevo.\n\n                            ˙◠˙    \n\n");
+                                            break; // break del default
+                                            
+                                    } // llave del cierre del switch de confirmacion
+                                } // esta es la llave de  if (seleccionMarca <=Categorias.length +1 && seleccionMarca > 0){
+                            } // esta es la llave de  ifif (seleccionCategoria < this.Categorias.length +1 &&seleccionCategoria >0 ){
+                        } //llave del else 
+                    } //llave del while
+                    
+                    break; // break del case 1
 
-                            String entradaFechaExp = JOptionPane.showInputDialog("Ingrese la fecha de expiración\n");
-                            float entradaPrecio = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingrese el precio del producto\n"));
-                            boolean estadoVentaAgregar = false;
-
-                            //SE CREA EL OBJETO PRODUCTO
-                            Producto nuevoProducto = new Producto(
-                                    entradaPrecio,
-                                    entradaNombre,
-                                    entradaCategoria,
-                                    entradaMarca,
-                                    entradaFechaExp,
-                                    estadoVentaAgregar);
-
-                            //CONFIRMACION DE CREACION
-                            String confirmarCreacionProducto = "Esta seguro de que desea registrar este producto?\n1- Si.\n2-No.\n\n";
-                            opcionRegistrarProductos = Integer.parseInt(JOptionPane.showInputDialog(null, confirmarCreacionProducto));
-                            switch (opcionRegistrarProductos) {
-                                case 1:
-                                    JOptionPane.showMessageDialog(null, "Se ha registrado el producto con exito.");
-                                    AgregarProducto(nuevoProducto);
-                                    repetirMenuRegistroProductos = false;
-                                    break;
-                                case 2:
-                                    repetirMenuRegistroProductos = false;
-                                    JOptionPane.showMessageDialog(null, "No se ha registrado el producto. Volviendo al menu principal...");
-                                    break;
-
-                                default://Opcion invalida 
-                                    JOptionPane.showMessageDialog(null, "¡Ups! opcion invalida, intentalo de nuevo.");
-                                    break;
-                            }
-                           
-                        }
-                       
-                    }
-                    break;
-
-                case 2: // Registrar una marca.
-
+                case 2: // REGISTRAR UNA MARCA
                     String nombreMarca = JOptionPane.showInputDialog(null, "Ingrese una nueva marca.\n");
-
                     String confirmarCreacionMarca = "Esta seguro de que desea registrar esta marca?\n1- Si.\n2-No.\n\n";
-
                     opcionRegistrarMarca = Integer.parseInt(JOptionPane.showInputDialog(null, confirmarCreacionMarca));
-
                     switch (opcionRegistrarMarca) {
                         case 1:
-
                             boolean resultadoMarcaAgregar = RegistrarMarca(nombreMarca);
                             if (resultadoMarcaAgregar) {
                                 JOptionPane.showMessageDialog(null, "Se ha registrado la marca con exito.");
@@ -124,17 +118,16 @@ public class VentanaRegistro {
                             }
 
                         case 2:
-
                             JOptionPane.showMessageDialog(null, "No se ha registrado la marca. Volviendo al menu principal...");
-                            break;
+                            break; // break del case 2
 
                         default://Opcion invalida 
-                            JOptionPane.showMessageDialog(null, "¡Ups! opcion inválida, intentalo de nuevo.");
-                            break;
+                            JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
+                            break; // break del default
                     }
-                    break;
+                    break; // break del case 2
 
-                case 3: //• Registrar una categoría.
+                case 3: // REGISTRAR UNA CATEGORIA
                     String nombreCategoria = JOptionPane.showInputDialog(null, "Ingrese la categoria del producto.\n");
                     String confirmarCreacionCategoria = "Esta seguro de que desea registrar esta categoria?\n1- Si.\n2-No.\n\n";
                     opcionRegistrarCategoria = Integer.parseInt(JOptionPane.showInputDialog(null, confirmarCreacionCategoria));
@@ -148,29 +141,26 @@ public class VentanaRegistro {
                             } else {
                                 JOptionPane.showMessageDialog(null, "No se logró registrar la categoría, verifique que los datos sean válidos.");
                             }
-
-                            break;
+                            break;// break del case 1
 
                         case 2:
-
                             JOptionPane.showMessageDialog(null, "No se ha registrado la categoria. Volviendo al menu principal...");
-                            break;
+                            break;// break del case 2
 
                         default://Opcion invalida 
-                            JOptionPane.showMessageDialog(null, "¡Ups! opcion inválida, intentalo de nuevo.");
-                            break;
+                            JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
+                            break;// break del default
                     }
+                    break; // break del case 3
 
-                    break;
-
-                case 4: //Regresar
+                case 4: //REGRESAR AL MENU PRINCIPAL
                     repetirMenuRegistro = false;
                     JOptionPane.showMessageDialog(null, "Volviendo al menu principal...");
-                    break;
+                    break; // break del case 4
 
                 default: //Opcion invalida 
-                    JOptionPane.showMessageDialog(null, "¡Ups! opcion invalida, intentalo de nuevo.\n");
-                    break;
+                    JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
+                    break; // break del default
 
             }
         }

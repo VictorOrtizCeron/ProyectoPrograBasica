@@ -1,15 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package grupo7proyectofinalsc202;
-
 import javax.swing.JOptionPane;
-
-/**
- *
- * @author victo
- */
 public class VentanaVenta {
 
     private Producto[] inventario;
@@ -20,7 +10,7 @@ public class VentanaVenta {
         int opcionInventario = 0;
         boolean repetirMenuInventario = true;
         while (repetirMenuInventario) {
-            String menuInventario = "Haz seleccionado registrar una venta\n\n"
+            String menuInventario = "─────── ⋆⋅⋆  ──────── Menu venta─────── ⋆⋅⋆  ────────\n\n"
                     + "1.Seleccionar productos.\n"
                     + "2.Ir a checkout.\n"
                     + "3.Regresar.\n";
@@ -43,7 +33,7 @@ public class VentanaVenta {
                     break;
 
                 default: //Opcion invalida 
-                    JOptionPane.showMessageDialog(null, "Ups! opcion invalida, intentalo de nuevo.");
+                    JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
                     break;
 
             }

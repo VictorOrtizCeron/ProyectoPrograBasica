@@ -1,11 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package grupo7proyectofinalsc202;
-
 import javax.swing.JOptionPane;
-
 public class VentanaInventario {
 
     private Producto[] inventario;//Van a ser arreglos
@@ -17,7 +11,7 @@ public class VentanaInventario {
 
         boolean repetirMenuInventario = true;
         while (repetirMenuInventario) {
-            String menuInventario = "Haz seleccionado Ver inventario\n\n"
+            String menuInventario = "─────── ⋆⋅⋆  ───────Menu inventario─────── ⋆⋅⋆  ───────\n\n"
                     + concatenarInventario(this.inventario) + "\n"
                     + "1.Filtrar .\n"
                     + "2.Regresar.\n";
@@ -27,7 +21,7 @@ public class VentanaInventario {
                 case 1:
                     //string del menu de categorias disponibles
                     String subMenuCategorias
-                            = "Categorias disponibles\n"
+                            = "─────── ⋆ ───────Categorias disponibles─────── ⋆ ───────\n"
                             + concatenarArregloString(this.Categorias) + "\n"
                             + (this.Categorias.length + 1) + ". Regresar"
                             + "\nSeleccione una categoría\n";
@@ -42,7 +36,7 @@ public class VentanaInventario {
                         Producto[] filtradoCategoria = filtradoCategoria(this.Categorias[categoriaSeleccionada - 1], this.inventario);
                         
                         //lista de productos filtrados desplegada
-                        String menuFiltradoPorCategoria = "Resultados de filtrado por Categoría\n\n"
+                        String menuFiltradoPorCategoria = "─────── ⋆ ─────── Resultados de filtrado por Categoría ─────── ⋆ ───────\n\n"
                                 + concatenarInventario(filtradoCategoria) + "\n"
                                 + "1. Filtrar por marca.\n"
                                 + "2. Regresar.\n";
@@ -53,7 +47,7 @@ public class VentanaInventario {
 
                             case 1:
                                 
-                                String marcasConcatenacion = "Marcas registradas: \n"+
+                                String marcasConcatenacion = "─────── ⋆ ─────── Marcas registradas ─────── ⋆ ───────: \n"+
                                         concatenarArregloString(this.Marcas)+
                                         "\nSeleccione una de las marcas disponibles\n"+
                                         (this.Marcas.length+1)+". Regresar";
@@ -64,7 +58,7 @@ public class VentanaInventario {
                                 if (marcaSeleccionada < Marcas.length+1 && marcaSeleccionada > 0) {
                                     Producto[] filtradoMarca = filtradoMarca(this.Marcas[marcaSeleccionada - 1], filtradoCategoria);
                                     
-                                    String menuFiltradoFinal = "Resultados de filtrado por categoría y marca\n\n"
+                                    String menuFiltradoFinal = "─────── ⋆ ─────── Resultados de filtrado por categoría y marca ─────── ⋆ ───────\n\n"
                                             + concatenarInventario(filtradoMarca) + "\n";
                                     
                                     JOptionPane.showMessageDialog(null,menuFiltradoFinal);
@@ -74,21 +68,21 @@ public class VentanaInventario {
                                      repetirMenuInventario = false;
                                     
                                 } else {
-                                    JOptionPane.showMessageDialog(null, "Ingrese una opción válida");
+                                    JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
                                 }
                                 break;
                             
                             case 2:
                                 break;
                             default:
-                                JOptionPane.showMessageDialog(null,"Opción inválida");
+                                JOptionPane.showMessageDialog(null,"Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
                                 break;
                         }
                        
                     } else if (categoriaSeleccionada == Categorias.length + 1) {
 
                     } else {
-                        JOptionPane.showMessageDialog(null, "Ingrese una opción válida");
+                        JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
                     }
 
                     break;
@@ -99,7 +93,7 @@ public class VentanaInventario {
                     break;
 
                 default: // Opcion invalida.
-                    JOptionPane.showMessageDialog(null, " Opción inválida, inténtalo de nuevo.");
+                    JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
                     break;
             }
         }
