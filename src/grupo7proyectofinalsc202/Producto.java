@@ -5,20 +5,18 @@ public class Producto {
     private String nombre;
     private String categoria;
     private String marca;
-    private String fechaExp;//opcional
-    private boolean estadoVenta;//opcional
+    private int cantidad;
     
     public boolean estaCaducado(){
           return false;
     }
 
-    public Producto(float precio, String nombre, String categoria, String marca, String fechaExp, boolean estadoVenta) {
+    public Producto(float precio, String nombre, String categoria, String marca) {
         this.precio = precio;
         this.nombre = nombre;
         this.categoria = categoria;
         this.marca = marca;
-        this.fechaExp = fechaExp;
-        this.estadoVenta = estadoVenta;
+        
     }
 
     public float getPrecio() {
@@ -53,20 +51,14 @@ public class Producto {
         this.marca = marca;
     }
 
-    public String getFechaExp() {
-        return fechaExp;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setFechaExp(String fechaExp) {
-        this.fechaExp = fechaExp;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public boolean getEstadoVenta() {
-        return estadoVenta;
-    }
-
-    public void setEstadoVenta(boolean estadoVenta) {
-        this.estadoVenta = estadoVenta;
-    }
+   
           
 }

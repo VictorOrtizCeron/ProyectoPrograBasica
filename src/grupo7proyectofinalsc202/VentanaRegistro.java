@@ -59,11 +59,10 @@ public class VentanaRegistro {
                                     String categoriaSeleccionada = this.Categorias[seleccionCategoria - 1];
 
                                     
-                                    //Digitar la fecha de expiracion
-                                    String entradaFechaExp = JOptionPane.showInputDialog("Ingrese la fecha de expiración.\n");
+                                    
                                     //Digitar el precio
                                     float entradaPrecio = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingrese el precio del producto.\n"));
-                                    boolean estadoVentaAgregar = false;
+                                    
                                     
                                     
                                     //SE CREA EL OBJETO PRODUCTO
@@ -71,9 +70,7 @@ public class VentanaRegistro {
                                             entradaPrecio,
                                             entradaNombre,
                                             categoriaSeleccionada,
-                                            marcaSeleccionada,
-                                            entradaFechaExp,
-                                            estadoVentaAgregar);
+                                            marcaSeleccionada);
 
                                     //CONFIRMACION DE CREACION
                                     String confirmarCreacionProducto = "¿Esta seguro de que desea registrar este producto?\n1- Si.\n2-No.\n\n";
