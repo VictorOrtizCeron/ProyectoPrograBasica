@@ -7,13 +7,13 @@ public class VentanaVenta {
     private Producto[] inventario;
     private String[] categorias;
     private String[] marcas;
+    private Venta venta;
 
     public VentanaVenta() {
-
+        venta = new Venta();
     }
 
     public void start() {
-        Venta venta = new Venta();
 
         boolean validarNombre = false;
 
@@ -28,12 +28,13 @@ public class VentanaVenta {
 
         boolean repetirMenuVenta = true;
         while (repetirMenuVenta) {
-            int opcion;
+
+            int opcion = 0;
             String menu = "─────── ⋆⋅⋆  ───────Menu Venta─────── ⋆⋅⋆  ───────\n\n"
                     + "Productos Disponibles:\n"
                     + "1. Escoger producto específico.\n"
                     + "2. Filtrar productos por Marca Y Categoría.\n"
-                    + "3. Finalizar compra.\n"
+                    + "3. Finalizar compra.\n"//imprimir factura
                     + "4. Regresar.\n";
 
             opcion = Integer.parseInt(JOptionPane.showInputDialog(null, menu));
@@ -47,12 +48,17 @@ public class VentanaVenta {
 
                     if (opcionSeleccionada <= this.inventario.length && opcionSeleccionada > 0) {
 
-                        Producto productoSeleccionado = this.inventario[opcionSeleccionada - 1];
+                        Producto productoSeleccionado = new Producto(
+                                this.inventario[opcionSeleccionada - 1].getPrecio(),
+                                this.inventario[opcionSeleccionada - 1].getNombre(),
+                                this.inventario[opcionSeleccionada - 1].getCategoria(),
+                                this.inventario[opcionSeleccionada - 1].getMarca()
+                        );
 
                         boolean validarCantidad = false;
                         int cantidad = 0;
 
-                        //valida cantidad
+                        //validar cantidad
                         while (!validarCantidad) {
                             cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad del producto seleccionado a comprar"));
                             validarCantidad = productoSeleccionado.setCantidad(cantidad);
@@ -61,9 +67,12 @@ public class VentanaVenta {
                             }
                         }
                         //se agrega producto a venta
-                        venta.agregar(productoSeleccionado);
+                        JOptionPane.showMessageDialog(null, productoSeleccionado.getCantidad());
+
+                        venta.agregar(productoSeleccionado, cantidad);
 
                         JOptionPane.showMessageDialog(null, "Productos agregado a la venta");
+
                     } else if (opcionSeleccionada == this.inventario.length + 1) {
                         //no hace nada, solo regresa 
                     } else {
@@ -116,7 +125,13 @@ public class VentanaVenta {
 
                                     int indiceProducto = Integer.parseInt(JOptionPane.showInputDialog(null, menuFiltradoFinal));
                                     if (indiceProducto <= filtradoMarca.length && indiceProducto > 0) {
-                                        Producto productoSeleccionado = filtradoMarca[indiceProducto - 1];
+
+                                        Producto productoSeleccionado = new Producto(
+                                                filtradoMarca[indiceProducto - 1].getPrecio(),
+                                                filtradoMarca[indiceProducto - 1].getNombre(),
+                                                filtradoMarca[indiceProducto - 1].getCategoria(),
+                                                filtradoMarca[indiceProducto - 1].getMarca()
+                                        );
 
                                         boolean validarCantidad = false;
                                         int cantidad = 0;
@@ -130,7 +145,7 @@ public class VentanaVenta {
                                             }
                                         }
                                         //se agrega producto a venta
-                                        venta.agregar(productoSeleccionado);
+                                        venta.agregar(productoSeleccionado, cantidad);
 
                                         JOptionPane.showMessageDialog(null, "Productos agregado a la venta");
 
@@ -147,7 +162,7 @@ public class VentanaVenta {
                                 break;
 
                             case 2:
-                                JOptionPane.showMessageDialog(null,"Regresando...");
+                                JOptionPane.showMessageDialog(null, "Regresando...");
                                 break;
                             default:
                                 JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
@@ -161,7 +176,55 @@ public class VentanaVenta {
                     }
                     break;
                 case 3:
-                    //
+                    //finalizar venta
+                    String factura = venta.getFactura() + "\n Escoja lo que desee hacer"
+                            + "\n1. Confirmar y realizar venta"//se devuelven a menu principal
+                            + "\n2. Cancelar venta"//se devuelven a menu principal
+                            + "\n3. Agregar más productos";//se devuelve a submenu de registro de ventas
+
+                    int opcionFactura = Integer.parseInt(JOptionPane.showInputDialog(factura));
+
+                    switch (opcionFactura) {
+                        case 1:
+                            //opcion para finalizar venta
+
+                            String subMenuConfirmacion = venta.getFactura() + "\n ¿Confirma la realización de la venta?"
+                                    + "\n1. Si"
+                                    + "\n2. No";
+
+                            int confirmacion = Integer.parseInt(JOptionPane.showInputDialog(subMenuConfirmacion));
+
+                            switch (confirmacion) {
+
+                                case 1:
+                                    JOptionPane.showMessageDialog(null, "Venta registrada, volviendo a menú principal");
+                                    repetirMenuVenta = false;
+                                    break;
+                                case 2:
+                                    JOptionPane.showMessageDialog(null, "Venta no registrada");
+                                    break;
+                                default:
+                                    JOptionPane.showMessageDialog(null, "Ingrese una opción válida");
+                                    break;
+
+                            }
+                            break;
+                        case 2:
+                            JOptionPane.showMessageDialog(null, "venta cancelada, regresando al menú principal");
+                            repetirMenuVenta = false;
+                            //opcion para cancelar venta
+
+                            break;
+                        case 3:
+                            JOptionPane.showMessageDialog(null, "Regresando a sub menu de registro de ventas");
+
+                            break;
+                        default:
+                            JOptionPane.showMessageDialog(null, "Ingrese una opción válida");
+                            break;
+
+                    }
+
                     break;
                 case 4:
                     repetirMenuVenta = false;
@@ -174,9 +237,9 @@ public class VentanaVenta {
         }
     }
 
-    public void finalizarVenta() {
+    public void finalizarVenta(String factura, int opcionFactura) {
 
-        //metodod en el cual se abre menu de finalizacion de venta, se imprime factura y se decide si agregar mas cosas, olvidar venta o concretar venta
+        //metodo en el cual se abre menu de finalizacion de venta, se imprime factura y se decide si agregar mas cosas, olvidar venta o concretar venta
     }
 
     //metodos del primer case para registrar una venta. 

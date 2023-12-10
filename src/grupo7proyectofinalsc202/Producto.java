@@ -7,16 +7,17 @@ public class Producto {
     private String marca;
     private int cantidad;//se utiliza para manejar la cantidad de producto en venta
     
-    public boolean estaCaducado(){
-          return false;
-    }
+    
 
     public Producto(float precio, String nombre, String categoria, String marca) {
         this.precio = precio;
         this.nombre = nombre;
         this.categoria = categoria;
         this.marca = marca;
-        
+        cantidad = 0;
+    }
+    public Producto(){
+        cantidad = 0;
     }
 
     public float getPrecio() {
@@ -52,12 +53,14 @@ public class Producto {
     }
 
     public int getCantidad() {
-        return cantidad;
+        return this.cantidad;
     }
 
     public boolean setCantidad(int cantidad) {
-        if(cantidad>0){
+        
+        if(cantidad>=0){
              this.cantidad = cantidad;
+             
              return true;
         }
         else{
@@ -66,8 +69,12 @@ public class Producto {
        
     }
     
-    public void resetCantidad(int cantidad) {
-             this.cantidad = cantidad;  
+    public void agregarCantidad(int cantidadExtra) {
+             System.out.println(cantidadExtra);
+        
+             this.cantidad += cantidadExtra;  
+             System.out.println(this.cantidad);
+             
     }
 
    
