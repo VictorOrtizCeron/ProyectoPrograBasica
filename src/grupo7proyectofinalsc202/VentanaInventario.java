@@ -2,7 +2,7 @@ package grupo7proyectofinalsc202;
 import javax.swing.JOptionPane;
 public class VentanaInventario {
 
-    private Producto[] inventario;//Van a ser arreglos
+    private Producto[] inventario;
     private String[] Categorias;
     private String[] Marcas;
 
@@ -32,7 +32,7 @@ public class VentanaInventario {
                     //validación de categoria seleccionada
                     if (categoriaSeleccionada < Categorias.length+1 && categoriaSeleccionada > 0) {
                         
-                        //arreglo de productos filtrados por categoria
+                        //se obtiene el arreglo de productos filtrados por categoria
                         Producto[] filtradoCategoria = filtradoCategoria(this.Categorias[categoriaSeleccionada - 1], this.inventario);
                         
                         //lista de productos filtrados desplegada
@@ -56,6 +56,9 @@ public class VentanaInventario {
                                 int marcaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(marcasConcatenacion));
                                 
                                 if (marcaSeleccionada < Marcas.length+1 && marcaSeleccionada > 0) {
+                                    
+                                    //arreglo filtrado por marcas y categorías
+                                    
                                     Producto[] filtradoMarca = filtradoMarca(this.Marcas[marcaSeleccionada - 1], filtradoCategoria);
                                     
                                     String menuFiltradoFinal = "─────── ⋆ ─────── Resultados de filtrado por categoría y marca ─────── ⋆ ───────\n\n"

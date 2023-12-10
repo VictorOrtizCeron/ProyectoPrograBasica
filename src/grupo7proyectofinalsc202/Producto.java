@@ -58,7 +58,7 @@ public class Producto {
 
     public boolean setCantidad(int cantidad) {
         
-        if(cantidad>=0){
+        if(cantidad>0){
              this.cantidad = cantidad;
              
              return true;
@@ -70,10 +70,10 @@ public class Producto {
     }
     
     public void agregarCantidad(int cantidadExtra) {
-             System.out.println(cantidadExtra);
+             
         
              this.cantidad += cantidadExtra;  
-             System.out.println(this.cantidad);
+             
              
     }
 

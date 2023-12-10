@@ -28,263 +28,219 @@ public class VentanaVenta {
 
         boolean repetirMenuVenta = true;
         while (repetirMenuVenta) {
+            if (inventario.length == 0) {
 
-            int opcion = 0;
-            String menu = "─────── ⋆⋅⋆  ───────Menu Venta─────── ⋆⋅⋆  ───────\n\n"
-                    + "Productos Disponibles:\n"
-                    + "1. Escoger producto específico.\n"
-                    + "2. Filtrar productos por Marca Y Categoría.\n"
-                    + "3. Finalizar compra.\n"//imprimir factura
-                    + "4. Regresar.\n";
+                JOptionPane.showMessageDialog(null, "No hay productos registrados");
+                repetirMenuVenta = false;
 
-            opcion = Integer.parseInt(JOptionPane.showInputDialog(null, menu));
+            } else {
+                int opcion = 0;
+                String menu = "─────── ⋆⋅⋆  ───────Menu Venta─────── ⋆⋅⋆  ───────\n\n"
+                        + "Productos Disponibles:\n"
+                        + "1. Escoger producto específico.\n"
+                        + "2. Filtrar productos por Marca Y Categoría.\n"
+                        + "3. Finalizar compra.\n"//imprimir factura
+                        + "4. Regresar.\n";
 
-            switch (opcion) {
-                case 1:
-                    String subMenuEleccionProducto = concatenarProductos(this.inventario) + "\n"
-                            + (this.inventario.length + 1) + ". Regresar";//concatenación de todos los productos disponibles
+                opcion = Integer.parseInt(JOptionPane.showInputDialog(null, menu));
 
-                    int opcionSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(subMenuEleccionProducto));
+                switch (opcion) {
+                    case 1:
+                        String subMenuEleccionProducto = concatenarProductos(this.inventario) + "\n"
+                                + (this.inventario.length + 1) + ". Regresar";//concatenación de todos los productos disponibles
 
-                    if (opcionSeleccionada <= this.inventario.length && opcionSeleccionada > 0) {
+                        int opcionSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(subMenuEleccionProducto));
 
-                        Producto productoSeleccionado = new Producto(
-                                this.inventario[opcionSeleccionada - 1].getPrecio(),
-                                this.inventario[opcionSeleccionada - 1].getNombre(),
-                                this.inventario[opcionSeleccionada - 1].getCategoria(),
-                                this.inventario[opcionSeleccionada - 1].getMarca()
-                        );
+                        if (opcionSeleccionada <= this.inventario.length && opcionSeleccionada > 0) {
 
-                        boolean validarCantidad = false;
-                        int cantidad = 0;
+                            Producto productoSeleccionado = new Producto(
+                                    this.inventario[opcionSeleccionada - 1].getPrecio(),
+                                    this.inventario[opcionSeleccionada - 1].getNombre(),
+                                    this.inventario[opcionSeleccionada - 1].getCategoria(),
+                                    this.inventario[opcionSeleccionada - 1].getMarca()
+                            );
 
-                        //validar cantidad
-                        while (!validarCantidad) {
-                            cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad del producto seleccionado a comprar"));
-                            validarCantidad = productoSeleccionado.setCantidad(cantidad);
-                            if (!validarCantidad) {
-                                JOptionPane.showMessageDialog(null, "Ingrese una cantidad válida");
-                            }
-                        }
-                        //se agrega producto a venta
-                        JOptionPane.showMessageDialog(null, productoSeleccionado.getCantidad());
+                            boolean validarCantidad = false;
+                            int cantidad = 0;
 
-                        venta.agregar(productoSeleccionado, cantidad);
-
-                        JOptionPane.showMessageDialog(null, "Productos agregado a la venta");
-
-                    } else if (opcionSeleccionada == this.inventario.length + 1) {
-                        //no hace nada, solo regresa 
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
-
-                    }
-                    break;
-
-                case 2:
-                    //filtrar lista de productos 
-                    //string del menu de categorias disponibles
-                    String subMenuCategorias
-                            = "─────── ⋆ ───────Categorias disponibles─────── ⋆ ───────\n"
-                            + concatenarArregloString(this.categorias) + "\n"
-                            + (this.categorias.length + 1) + ". Regresar"
-                            + "\nSeleccione una categoría\n";
-
-                    //selección de categoría
-                    int categoriaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(subMenuCategorias));
-
-                    if (categoriaSeleccionada < categorias.length + 1 && categoriaSeleccionada > 0) {
-
-                        //arreglo de productos filtrados por categoria
-                        Producto[] filtradoCategoria = filtradoCategoria(this.categorias[categoriaSeleccionada - 1], this.inventario);
-
-                        //lista de productos filtrados desplegada
-                        String menuFiltradoPorCategoria = "─────── ⋆ ─────── Resultados de filtrado por Categoría ─────── ⋆ ───────\n\n"
-                                + concatenarInventario(filtradoCategoria) + "\n"
-                                + "1. Filtrar por marca.\n"
-                                + "2. Regresar.\n";
-
-                        int opcionSubMenuMarcas = Integer.parseInt(JOptionPane.showInputDialog(menuFiltradoPorCategoria));
-
-                        switch (opcionSubMenuMarcas) {
-
-                            case 1:
-
-                                String marcasConcatenacion = "─────── ⋆ ─────── Marcas registradas ─────── ⋆ ───────: \n"
-                                        + concatenarArregloString(this.marcas) + "\n"
-                                        + (this.marcas.length + 1) + ". Regresar\n"
-                                        + "Seleccione una de las marcas disponibles\n";
-
-                                int marcaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(marcasConcatenacion));
-
-                                if (marcaSeleccionada < marcas.length + 1 && marcaSeleccionada > 0) {
-                                    Producto[] filtradoMarca = filtradoMarca(this.marcas[marcaSeleccionada - 1], filtradoCategoria);
-
-                                    String menuFiltradoFinal = "─────── ⋆ ─────── Resultados de filtrado por categoría y marca ─────── ⋆ ───────\n\n"
-                                            + concatenarProductos(filtradoMarca) + "\n";
-
-                                    int indiceProducto = Integer.parseInt(JOptionPane.showInputDialog(null, menuFiltradoFinal));
-                                    if (indiceProducto <= filtradoMarca.length && indiceProducto > 0) {
-
-                                        Producto productoSeleccionado = new Producto(
-                                                filtradoMarca[indiceProducto - 1].getPrecio(),
-                                                filtradoMarca[indiceProducto - 1].getNombre(),
-                                                filtradoMarca[indiceProducto - 1].getCategoria(),
-                                                filtradoMarca[indiceProducto - 1].getMarca()
-                                        );
-
-                                        boolean validarCantidad = false;
-                                        int cantidad = 0;
-
-                                        //valida cantidad
-                                        while (!validarCantidad) {
-                                            cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad del producto seleccionado a comprar"));
-                                            validarCantidad = productoSeleccionado.setCantidad(cantidad);
-                                            if (!validarCantidad) {
-                                                JOptionPane.showMessageDialog(null, "Ingrese una cantidad válida");
-                                            }
-                                        }
-                                        //se agrega producto a venta
-                                        venta.agregar(productoSeleccionado, cantidad);
-
-                                        JOptionPane.showMessageDialog(null, "Productos agregado a la venta");
-
-                                    } else {
-                                        JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n");
-                                    }
-
-                                } else if (marcaSeleccionada == marcas.length + 1) {
-                                    repetirMenuVenta = false;
-
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
+                            //validar cantidad
+                            while (!validarCantidad) {
+                                cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad del producto seleccionado a comprar"));
+                                validarCantidad = productoSeleccionado.setCantidad(cantidad);
+                                if (!validarCantidad) {
+                                    JOptionPane.showMessageDialog(null, "Ingrese una cantidad válida");
                                 }
-                                break;
+                            }
+                            //se agrega producto a venta
 
-                            case 2:
-                                JOptionPane.showMessageDialog(null, "Regresando...");
-                                break;
-                            default:
-                                JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
-                                break;
+                            venta.agregar(productoSeleccionado, cantidad);
+
+                            JOptionPane.showMessageDialog(null, "Productos agregado a la venta");
+
+                        } else if (opcionSeleccionada == this.inventario.length + 1) {
+                            //no hace nada, solo regresa 
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
+
                         }
+                        break;
 
-                    } else if (categoriaSeleccionada == categorias.length + 1) {
+                    case 2:
+                        //filtrar lista de productos 
+                        //string del menu de categorias disponibles
+                        String subMenuCategorias
+                                = "─────── ⋆ ───────Categorias disponibles─────── ⋆ ───────\n"
+                                + concatenarArregloString(this.categorias) + "\n"
+                                + (this.categorias.length + 1) + ". Regresar"
+                                + "\nSeleccione una categoría\n";
 
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
-                    }
-                    break;
-                case 3:
-                    //finalizar venta
-                    String factura = venta.getFactura() + "\n Escoja lo que desee hacer"
-                            + "\n1. Confirmar y realizar venta"//se devuelven a menu principal
-                            + "\n2. Cancelar venta"//se devuelven a menu principal
-                            + "\n3. Agregar más productos";//se devuelve a submenu de registro de ventas
+                        //selección de categoría
+                        int categoriaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(subMenuCategorias));
 
-                    int opcionFactura = Integer.parseInt(JOptionPane.showInputDialog(factura));
+                        if (categoriaSeleccionada < categorias.length + 1 && categoriaSeleccionada > 0) {
 
-                    switch (opcionFactura) {
-                        case 1:
-                            //opcion para finalizar venta
+                            //arreglo de productos filtrados por categoria
+                            Producto[] filtradoCategoria = filtradoCategoria(this.categorias[categoriaSeleccionada - 1], this.inventario);
 
-                            String subMenuConfirmacion = venta.getFactura() + "\n ¿Confirma la realización de la venta?"
-                                    + "\n1. Si"
-                                    + "\n2. No";
+                            //lista de productos filtrados desplegada
+                            String menuFiltradoPorCategoria = "─────── ⋆ ─────── Resultados de filtrado por Categoría ─────── ⋆ ───────\n\n"
+                                    + concatenarInventario(filtradoCategoria) + "\n"
+                                    + "1. Filtrar por marca.\n"
+                                    + "2. Regresar.\n";
 
-                            int confirmacion = Integer.parseInt(JOptionPane.showInputDialog(subMenuConfirmacion));
+                            int opcionSubMenuMarcas = Integer.parseInt(JOptionPane.showInputDialog(menuFiltradoPorCategoria));
 
-                            switch (confirmacion) {
+                            switch (opcionSubMenuMarcas) {
 
                                 case 1:
-                                    JOptionPane.showMessageDialog(null, "Venta registrada, volviendo a menú principal");
-                                    repetirMenuVenta = false;
+
+                                    String marcasConcatenacion = "─────── ⋆ ─────── Marcas registradas ─────── ⋆ ───────: \n"
+                                            + concatenarArregloString(this.marcas) + "\n"
+                                            + (this.marcas.length + 1) + ". Regresar\n"
+                                            + "Seleccione una de las marcas disponibles\n";
+
+                                    int marcaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(marcasConcatenacion));
+
+                                    if (marcaSeleccionada < marcas.length + 1 && marcaSeleccionada > 0) {
+                                        Producto[] filtradoMarca = filtradoMarca(this.marcas[marcaSeleccionada - 1], filtradoCategoria);
+
+                                        String menuFiltradoFinal = "─────── ⋆ ─────── Resultados de filtrado por categoría y marca ─────── ⋆ ───────\n\n"
+                                                + concatenarProductos(filtradoMarca) + "\n";
+
+                                        int indiceProducto = Integer.parseInt(JOptionPane.showInputDialog(null, menuFiltradoFinal));
+                                        if (indiceProducto <= filtradoMarca.length && indiceProducto > 0) {
+
+                                            Producto productoSeleccionado = new Producto(
+                                                    filtradoMarca[indiceProducto - 1].getPrecio(),
+                                                    filtradoMarca[indiceProducto - 1].getNombre(),
+                                                    filtradoMarca[indiceProducto - 1].getCategoria(),
+                                                    filtradoMarca[indiceProducto - 1].getMarca()
+                                            );
+
+                                            boolean validarCantidad = false;
+                                            int cantidad = 0;
+
+                                            //valida cantidad
+                                            while (!validarCantidad) {
+                                                cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad del producto seleccionado a comprar"));
+                                                validarCantidad = productoSeleccionado.setCantidad(cantidad);
+                                                if (!validarCantidad) {
+                                                    JOptionPane.showMessageDialog(null, "Ingrese una cantidad válida");
+                                                }
+                                            }
+                                            //se agrega producto a venta
+                                            venta.agregar(productoSeleccionado, cantidad);
+
+                                            JOptionPane.showMessageDialog(null, "Productos agregado a la venta");
+
+                                        } else {
+                                            JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n");
+                                        }
+
+                                    } else if (marcaSeleccionada == marcas.length + 1) {
+                                        repetirMenuVenta = false;
+
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
+                                    }
                                     break;
+
                                 case 2:
-                                    JOptionPane.showMessageDialog(null, "Venta no registrada");
+                                    JOptionPane.showMessageDialog(null, "Regresando...");
                                     break;
                                 default:
-                                    JOptionPane.showMessageDialog(null, "Ingrese una opción válida");
+                                    JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
                                     break;
-
                             }
-                            break;
-                        case 2:
-                            JOptionPane.showMessageDialog(null, "venta cancelada, regresando al menú principal");
-                            repetirMenuVenta = false;
-                            //opcion para cancelar venta
 
-                            break;
-                        case 3:
-                            JOptionPane.showMessageDialog(null, "Regresando a sub menu de registro de ventas");
+                        } else if (categoriaSeleccionada == categorias.length + 1) {
 
-                            break;
-                        default:
-                            JOptionPane.showMessageDialog(null, "Ingrese una opción válida");
-                            break;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
+                        }
+                        break;
+                    case 3:
+                        //finalizar venta
+                        String factura = venta.getFactura() + "\n\n Escoja lo que desee hacer"
+                                + "\n1. Confirmar y realizar venta"//se devuelven a menu principal
+                                + "\n2. Cancelar venta"//se devuelven a menu principal
+                                + "\n3. Agregar más productos";//se devuelve a submenu de registro de ventas
 
-                    }
+                        int opcionFactura = Integer.parseInt(JOptionPane.showInputDialog(factura));
 
-                    break;
-                case 4:
-                    repetirMenuVenta = false;
-                    break;
+                        switch (opcionFactura) {
+                            case 1:
+                                //opcion para finalizar venta
 
-                default:
-                    JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
-                    break;
+                                String subMenuConfirmacion = venta.getFactura() + "\n ¿Confirma la realización de la venta?"
+                                        + "\n1. Si"
+                                        + "\n2. No";
+
+                                int confirmacion = Integer.parseInt(JOptionPane.showInputDialog(subMenuConfirmacion));
+
+                                switch (confirmacion) {
+
+                                    case 1:
+                                        JOptionPane.showMessageDialog(null, "Venta registrada, volviendo a menú principal");
+                                        repetirMenuVenta = false;
+                                        break;
+                                    case 2:
+                                        JOptionPane.showMessageDialog(null, "Venta no registrada");
+                                        break;
+                                    default:
+                                        JOptionPane.showMessageDialog(null, "Ingrese una opción válida");
+                                        break;
+
+                                }
+                                break;
+                            case 2:
+                                //si no existe , se agrega
+                                JOptionPane.showMessageDialog(null, "venta cancelada, regresando al menú principal");
+                                repetirMenuVenta = false;
+
+                                break;
+                            case 3:
+                                JOptionPane.showMessageDialog(null, "Regresando a sub menu de registro de ventas");
+
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(null, "Ingrese una opción válida");
+                                break;
+
+                        }
+
+                        break;
+                    case 4:
+                        repetirMenuVenta = false;
+                        break;
+
+                    default:
+                        JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
+                        break;
+                }
+
             }
-        }
-    }
 
-    public void finalizarVenta(String factura, int opcionFactura) {
-
-        //metodo en el cual se abre menu de finalizacion de venta, se imprime factura y se decide si agregar mas cosas, olvidar venta o concretar venta
-    }
-
-    //metodos del primer case para registrar una venta. 
-    public void filtrarPorCategoria() {
-        String subMenuCategorias = "─────── ⋆ ─────── Categorías Disponibles ─────── ⋆ ───────\n"
-                + concatenarArregloString(this.categorias) + "\n"
-                + (this.categorias.length + 1) + ". Regresar\n"
-                + "Seleccione una categoría\n";
-
-        int categoriaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(subMenuCategorias));
-
-        if (categoriaSeleccionada < categorias.length + 1 && categoriaSeleccionada > 0) {
-            Producto[] filtradoCategoria = filtradoCategoria(categorias[categoriaSeleccionada - 1], inventario);
-
-            String menuFiltradoPorCategoria = "─────── ⋆ ─────── Resultados de filtrado por Categoría ─────── ⋆ ───────\n\n"
-                    + concatenarInventario(filtradoCategoria) + "\n";
-
-            JOptionPane.showMessageDialog(null, menuFiltradoPorCategoria);
-        } else if (categoriaSeleccionada == categorias.length + 1) {
-            // Regresar
-        } else {
-            JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
-        }
-    }
-
-    public void filtrarPorMarca() {
-        String subMenuMarcas = "─────── ⋆ ─────── Marcas Disponibles ─────── ⋆ ───────\n"
-                + concatenarArregloString(this.marcas) + "\n"
-                + (this.marcas.length + 1) + ". Regresar\n"
-                + "Seleccione una marca\n";
-
-        int marcaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(subMenuMarcas));
-
-        if (marcaSeleccionada < marcas.length + 1 && marcaSeleccionada > 0) {
-            Producto[] filtradoMarca = filtradoMarca(marcas[marcaSeleccionada - 1], inventario);
-
-            String menuFiltradoPorMarca = "─────── ⋆ ─────── Resultados de filtrado por Marca ─────── ⋆ ───────\n\n"
-                    + concatenarInventario(filtradoMarca) + "\n";
-
-            JOptionPane.showMessageDialog(null, menuFiltradoPorMarca);
-
-        } else if (marcaSeleccionada == marcas.length + 1) {
-            // Regresar
-        } else {
-            JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n ");
         }
     }
 

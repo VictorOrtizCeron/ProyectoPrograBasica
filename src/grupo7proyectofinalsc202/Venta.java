@@ -75,15 +75,7 @@ public class Venta {
             
             //agregación de más cantidad del mismo producto sin redundancias
             if(productoAgregado.getNombre().equals(productosDeCompra[i].getNombre())){
-                
-               
-                
-               
                 productosDeCompra[i].agregarCantidad(cantidad);
-                 
-                
-                
-               
                 return true;
             }
             

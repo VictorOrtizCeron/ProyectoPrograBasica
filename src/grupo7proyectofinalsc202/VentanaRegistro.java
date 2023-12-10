@@ -108,11 +108,12 @@ public class VentanaRegistro {
                             if (resultadoMarcaAgregar) {
                                 JOptionPane.showMessageDialog(null, "Se ha registrado la marca con exito.");
 
-                                break;
+                                
                             } else {
                                 JOptionPane.showMessageDialog(null, "No se logró registrar la marca, verifique que los datos sean válidos.");
-                                break;
+                                
                             }
+                            break;
 
                         case 2:
                             JOptionPane.showMessageDialog(null, "No se ha registrado la marca. Volviendo al menu principal...");
@@ -162,7 +163,7 @@ public class VentanaRegistro {
             }
         }
     }
-
+    //sirve para concatenar el arreglo de marcas y categorías
     public String concatenarArregloString(String[] arreglo) {
         String arregloString = "";
 
@@ -179,6 +180,7 @@ public class VentanaRegistro {
 
     public void AgregarProducto(Producto nuevoProducto) {
         int limite = Inventario.length; //Indice +1
+        
         Producto[] inventarioNuevo = new Producto[limite + 1];
         for (int i = 0; i < limite; i++) {
             inventarioNuevo[i] = Inventario[i];
@@ -188,12 +190,14 @@ public class VentanaRegistro {
     }
 
     public boolean RegistrarCategoria(String nombreCategoria) {
-
+        
+        //verifica si ya existe la categoría en el arreglo de categorías
         for (int i = 0; i < Categorias.length; i++) {
             if (nombreCategoria.equals(this.Categorias[i])) {
                 return false;
             }
         }
+        //si no existe , se agrega
         int limite = Categorias.length;
         String[] nuevasCategorias = new String[limite + 1];
         for (int i = 0; i < Categorias.length; i++) {
@@ -205,12 +209,13 @@ public class VentanaRegistro {
     }
 
     public boolean RegistrarMarca(String nombreMarca) {
-
+        //verifica si ya existe la categoría en el arreglo de marcas
         for (int i = 0; i < Marcas.length; i++) {
             if (nombreMarca.equals(this.Marcas[i])) {
                 return false;
             }
         }
+        //si no existe , se agrega
         int limite = Marcas.length;
         String[] nuevasMarcas = new String[limite + 1];
         for (int i = 0; i < Marcas.length; i++) {
@@ -220,17 +225,7 @@ public class VentanaRegistro {
         this.Marcas = nuevasMarcas;
         return true;
     }
-
-    public boolean ProductoExistente() {
-        boolean existe = false;
-        if (!this.existente) {
-            existe = true;
-        } else {
-            this.existente = false;
-        }
-        return existe;
-    }
-
+    
     public Producto[] getInventario() {
         return Inventario;
     }
