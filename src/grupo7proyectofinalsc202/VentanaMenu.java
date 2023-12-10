@@ -1,12 +1,12 @@
 package grupo7proyectofinalsc202;
 import javax.swing.JOptionPane;
 public class VentanaMenu {
-//    Producto frijol = new Producto(200, "Frijoles Ducal", "Comida enlatada", "Ducal", "5nov2024", false);
-//    Producto cereal = new Producto(400, "Nesquik", "Cereales", "Nestle", "5nov2024", false);
-//    Producto cereal2 = new Producto(500, "Zucaritas", "Cereales", "Kellogs", "5nov2024", false);
-    private Producto[] inventario = {}; //frijol, cereal, cereal2
-    private String[] Categorias = {}; //"Cereales", "Comida enlatada"
-    private String[] Marcas = {}; //"Ducal","Nestle","Kellogs"
+    Producto frijol = new Producto(200, "Frijoles Ducal", "Comida enlatada", "Ducal");
+    Producto cereal = new Producto(400, "Nesquik", "Cereales", "Nestle");
+    Producto cereal2 = new Producto(500, "Zucaritas", "Cereales", "Kellogs");
+    private Producto[] inventario = {frijol, cereal, cereal2}; //frijol, cereal, cereal2
+    private String[] Categorias = {"Cereales", "Comida enlatada"}; //"Cereales", "Comida enlatada"
+    private String[] Marcas = {"Ducal","Nestle","Kellogs"}; //"Ducal","Nestle","Kellogs"
 
 
     public void start() {
@@ -50,7 +50,12 @@ public class VentanaMenu {
 
                 case 3: //REGISTRAR UNA VENTA
                     VentanaVenta ventanaVenta = new VentanaVenta();
+                    ventanaVenta.setMarcas(this.Marcas);
+                    ventanaVenta.setCategorias(this.Categorias);
+                    ventanaVenta.setInventario(this.inventario);
                     ventanaVenta.start();
+                    
+                    
                     break; // break del case 3
 
                 case 4: //SALIR AL MENU PRICIPAL

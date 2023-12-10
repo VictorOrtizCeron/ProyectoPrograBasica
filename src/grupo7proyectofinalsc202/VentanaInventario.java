@@ -142,7 +142,7 @@ public class VentanaInventario {
             for (int i = 0; i < productos.length; i++) {
 
                 inventarioString = inventarioString
-                        + "\n Nombre:   "
+                        + "\nNombre:   "
                         + productos[i].getNombre()
                         + "\nCategoría: "
                         + productos[i].getCategoria()

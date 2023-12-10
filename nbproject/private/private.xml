@@ -5,12 +5,17 @@
             <url>src/grupo7proyectofinalsc202/VentanaRegistro.java</url>
             <bookmark id="1">
                 <name/>
-                <line>271</line>
+                <line>257</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/victo/OneDrive/Documents/NetBeansProjects/Grupo7ProyectoFinalSC202/src/grupo7proyectofinalsc202/Producto.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Documents/NetBeansProjects/Grupo7ProyectoFinalSC202/src/grupo7proyectofinalsc202/VentanaVenta.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Documents/NetBeansProjects/Grupo7ProyectoFinalSC202/src/grupo7proyectofinalsc202/Venta.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Documents/NetBeansProjects/Grupo7ProyectoFinalSC202/src/grupo7proyectofinalsc202/VentanaRegistro.java</file>
+        </group>
     </open-files>
 </project-private>

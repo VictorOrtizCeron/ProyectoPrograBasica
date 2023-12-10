@@ -5,7 +5,7 @@ public class Producto {
     private String nombre;
     private String categoria;
     private String marca;
-    private int cantidad;
+    private int cantidad;//se utiliza para manejar la cantidad de producto en venta
     
     public boolean estaCaducado(){
           return false;
@@ -55,8 +55,19 @@ public class Producto {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public boolean setCantidad(int cantidad) {
+        if(cantidad>0){
+             this.cantidad = cantidad;
+             return true;
+        }
+        else{
+            return false;
+        }
+       
+    }
+    
+    public void resetCantidad(int cantidad) {
+             this.cantidad = cantidad;  
     }
 
    
