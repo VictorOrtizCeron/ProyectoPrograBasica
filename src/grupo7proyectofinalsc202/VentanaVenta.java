@@ -127,37 +127,44 @@ public class VentanaVenta {
 
                                         String menuFiltradoFinal = "─────── ⋆ ─────── Resultados de filtrado por categoría y marca ─────── ⋆ ───────\n\n"
                                                 + concatenarProductos(filtradoMarca) + "\n";
-                                        
-                                        int indiceProducto = Integer.parseInt(JOptionPane.showInputDialog(null, menuFiltradoFinal));                                            
-                                        if (indiceProducto <= filtradoMarca.length && indiceProducto > 0) {
 
-                                            Producto productoSeleccionado = new Producto(
-                                                    filtradoMarca[indiceProducto - 1].getPrecio(),
-                                                    filtradoMarca[indiceProducto - 1].getNombre(),
-                                                    filtradoMarca[indiceProducto - 1].getCategoria(),
-                                                    filtradoMarca[indiceProducto - 1].getMarca()
-                                            );
+                                        if (filtradoMarca.length == 0) {
 
-                                            boolean validarCantidad = false;
-                                            int cantidad = 0;
+                                            JOptionPane.showMessageDialog(null, "No hay productos con los filtros seleccionados");
 
-                                            //valida cantidad
-                                            while (!validarCantidad) {
-                                                cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad del producto seleccionado a comprar: "));
-                                                validarCantidad = productoSeleccionado.setCantidad(cantidad);
-                                                if (!validarCantidad) {
-                                                    JOptionPane.showMessageDialog(null, "Ingrese una cantidad válida.\n\n                            ˙◠˙    \n\n");
-                                                }
-                                            }
-                                            //se agrega producto a venta
-                                            venta.agregar(productoSeleccionado, cantidad);
-
-                                            JOptionPane.showMessageDialog(null, "Producto agregado a la venta.\n\n                       ᵔ◡ᵔ   \n\n");
-                                            
                                         } else {
-                                            JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo. \n\n");
+                                            int indiceProducto = Integer.parseInt(JOptionPane.showInputDialog(null, menuFiltradoFinal));
+                                            if (indiceProducto <= filtradoMarca.length && indiceProducto > 0) {
+
+                                                Producto productoSeleccionado = new Producto(
+                                                        filtradoMarca[indiceProducto - 1].getPrecio(),
+                                                        filtradoMarca[indiceProducto - 1].getNombre(),
+                                                        filtradoMarca[indiceProducto - 1].getCategoria(),
+                                                        filtradoMarca[indiceProducto - 1].getMarca()
+                                                );
+
+                                                boolean validarCantidad = false;
+                                                int cantidad = 0;
+
+                                                //valida cantidad
+                                                while (!validarCantidad) {
+                                                    cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad del producto seleccionado a comprar: "));
+                                                    validarCantidad = productoSeleccionado.setCantidad(cantidad);
+                                                    if (!validarCantidad) {
+                                                        JOptionPane.showMessageDialog(null, "Ingrese una cantidad válida.\n\n                            ˙◠˙    \n\n");
+                                                    }
+                                                }
+                                                //se agrega producto a venta
+                                                venta.agregar(productoSeleccionado, cantidad);
+
+                                                JOptionPane.showMessageDialog(null, "Producto agregado a la venta.\n\n                       ᵔ◡ᵔ   \n\n");
+
+                                            } else {
+                                                JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo. \n\n");
+                                            }
+
                                         }
-                                        
+
                                     } else if (marcaSeleccionada == marcas.length + 1) {
                                         repetirMenuVenta = false;
 
@@ -189,7 +196,7 @@ public class VentanaVenta {
                                 + "\n";
 
                         int opcionFactura = Integer.parseInt(JOptionPane.showInputDialog(factura));
-                        
+
                         switch (opcionFactura) {
                             case 1:
                                 //Confirmacion para para finalizar venta
@@ -227,7 +234,7 @@ public class VentanaVenta {
                                 break;
                         }
                         break;
-                        
+
                     case 4:
                         repetirMenuVenta = false;
                         break;
@@ -235,7 +242,7 @@ public class VentanaVenta {
                     default:
                         JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
                         break;
-                        
+
                 } //llave del switch menu venta 
             } //llave del else que verifica que todo si se cumpla y muestre el menu principal de la ventana venta
         } //llave del while menu venta
