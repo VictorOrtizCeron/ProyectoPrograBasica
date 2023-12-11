@@ -1,16 +1,19 @@
 package grupo7proyectofinalsc202;
 import javax.swing.JOptionPane;
 public class VentanaMenu {
-//    Producto frijol = new Producto(200, "Frijoles Ducal", "Comida enlatada", "Ducal");
-//    Producto cereal = new Producto(400, "Nesquik", "Cereales", "Nestle");
-//    Producto cereal2 = new Producto(500, "Zucaritas", "Cereales", "Kellogs");
-    private Producto[] inventario = {}; //frijol, cereal, cereal2
-    private String[] Categorias = {}; //"Cereales", "Comida enlatada"
-    private String[] Marcas = {}; //"Ducal","Nestle","Kellogs"
+    
+//Constantes de practica. 
+    Producto frijol = new Producto(200, "Frijoles Ducal", "Comida enlatada", "Ducal");
+    Producto cereal = new Producto(400, "Nesquik", "Cereales", "Nestle");
+    Producto cereal2 = new Producto(500, "Zucaritas", "Cereales", "Kellogs");
+    
+    //atributos
+    private Producto[] inventario = {frijol, cereal, cereal2}; //frijol, cereal, cereal2
+    private String[] Categorias = {"Cereales", "Comida enlatada"}; //"Cereales", "Comida enlatada"
+    private String[] Marcas = {"Ducal","Nestle","Kellogs"}; //"Ducal","Nestle","Kellogs"
 
 
     public void start() {
-
         int opcion = 0;
         boolean repetirMenu = true;
 
@@ -21,7 +24,7 @@ public class VentanaMenu {
                     + "\n1-Registro."
                     + "\n2-Ver inventario."
                     + "\n3-Registrar una venta."
-                    + "\n4-Salir.\n ";
+                    + "\n4-Salir.\n\n";
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menuPrincipal));
             switch (opcion) {
                 case 1: //VER MENU REGISTRO
@@ -69,23 +72,7 @@ public class VentanaMenu {
             }
         }
     }
-
-//    public Producto getFrijol() {
-//        return frijol;
-//    }
-//
-//    public void setFrijol(Producto frijol) {
-//        this.frijol = frijol;
-//    }
-//
-//    public Producto getCereal() {
-//        return cereal;
-//    }
-//
-//    public void setCereal(Producto cereal) {
-//        this.cereal = cereal;
-//    }
-
+    
     public Producto[] getInventario() {
         return inventario;
     }

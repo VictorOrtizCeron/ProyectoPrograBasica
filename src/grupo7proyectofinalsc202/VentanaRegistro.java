@@ -20,17 +20,16 @@ public class VentanaRegistro {
                     + "1-Registrar nuevos productos.\n"
                     + "2-Registrar una marca.\n"
                     + "3-Registrar una categoria.\n"
-                    + "4-Regresar\n";
+                    + "4-Regresar\n\n";
             opcionRegistro = Integer.parseInt(JOptionPane.showInputDialog(menuRegistro));
             switch (opcionRegistro) { //Sub menu de registro
-
+                
                 case 1: // REGISTRAR NUEVOS PRODUCTOS
-                    
                     boolean repetirMenuRegistroProductos = true;
                     while (repetirMenuRegistroProductos) { //Ciclo para confirmar si quiere registrar o no el producto. 
                         //Validar existencia de productos o marcas.
                         if (Categorias.length == 0 || Marcas.length == 0) { //Si no existen
-                            JOptionPane.showMessageDialog(null, "No hay categorias o marcas registradas\n\n                            ˙◠˙    \n\n    Debes registrar ambas primero.");
+                            JOptionPane.showMessageDialog(null, "──────────────── ⋆⋅⋆  ────────────────\n\nNo hay categorias o marcas registradas.\n\n                               ˙◠˙    \n\n     Debes registrar ambas primero.\n\n──────────────── ⋆⋅⋆  ────────────────");
                             repetirMenuRegistroProductos = false;
 
                         } else { //Si si existen entonces se procede con el registro del producto. 
@@ -57,14 +56,10 @@ public class VentanaRegistro {
                                 //Recorrer el arreglo para almacenar la categoria seleccion en el registro del nuevo producto.
                                 if (seleccionCategoria <= this.Categorias.length + 1 && seleccionCategoria > 0) {
                                     String categoriaSeleccionada = this.Categorias[seleccionCategoria - 1];
-
-                                    
-                                    
+        
                                     //Digitar el precio
                                     float entradaPrecio = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingrese el precio del producto.\n"));
-                                    
-                                    
-                                    
+
                                     //SE CREA EL OBJETO PRODUCTO
                                     Producto nuevoProducto = new Producto(
                                             entradaPrecio,
@@ -77,17 +72,17 @@ public class VentanaRegistro {
                                     opcionRegistrarProductos = Integer.parseInt(JOptionPane.showInputDialog(null, confirmarCreacionProducto));
                                     switch (opcionRegistrarProductos) {
                                         case 1:
-                                            JOptionPane.showMessageDialog(null, "¡Se ha registrado el producto con exito!");
+                                            JOptionPane.showMessageDialog(null, "Se ha registrado el producto con exito.\n\n                            ᵔ◡ᵔ   \n\n");
                                             AgregarProducto(nuevoProducto);
                                             repetirMenuRegistroProductos = false;
                                             break; // break del case 1
                                         case 2:
                                             repetirMenuRegistroProductos = false;
-                                            JOptionPane.showMessageDialog(null, "No se ha registrado el producto. Volviendo al menu principal...");
+                                            JOptionPane.showMessageDialog(null, "No se ha registrado el producto.\n\n                            ˙◠˙    \n\n");
                                             break;// break del case 2
 
                                         default://Opcion invalida 
-                                            JOptionPane.showMessageDialog(null, "¡Ups! opcion invalida, intentalo de nuevo.\n\n                            ˙◠˙    \n\n");
+                                            JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
                                             break; // break del default
                                             
                                     } // llave del cierre del switch de confirmacion
@@ -106,17 +101,17 @@ public class VentanaRegistro {
                         case 1:
                             boolean resultadoMarcaAgregar = RegistrarMarca(nombreMarca);
                             if (resultadoMarcaAgregar) {
-                                JOptionPane.showMessageDialog(null, "Se ha registrado la marca con exito.");
+                                JOptionPane.showMessageDialog(null, "Se ha registrado la marca con exito.\n\n                            ᵔ◡ᵔ   \n\n");
 
                                 
                             } else {
-                                JOptionPane.showMessageDialog(null, "No se logró registrar la marca, verifique que los datos sean válidos.");
+                                JOptionPane.showMessageDialog(null, "No se logró registrar la marca, verifique que los datos sean válidos.\n\n                            ˙◠˙    \n\n");
                                 
                             }
                             break;
 
-                        case 2:
-                            JOptionPane.showMessageDialog(null, "No se ha registrado la marca. Volviendo al menu principal...");
+                        case 2: //vuelve a ensenar el submenu de registro
+                            JOptionPane.showMessageDialog(null, "No se ha registrado la marca.\n\n                         ˙◠˙    \n\n");
                             break; // break del case 2
 
                         default://Opcion invalida 
@@ -135,18 +130,18 @@ public class VentanaRegistro {
 
                             if (resultadoCategoriaAgregar) {
 
-                                JOptionPane.showMessageDialog(null, "Se ha registrado la categoría con exito.");
+                                JOptionPane.showMessageDialog(null, "Se ha registrado la categoría con exito.\n\n                              ᵔ◡ᵔ   \n\n");
                             } else {
-                                JOptionPane.showMessageDialog(null, "No se logró registrar la categoría, verifique que los datos sean válidos.");
+                                JOptionPane.showMessageDialog(null, "No se logró registrar la categoría, verifique que los datos sean válidos. ˙◠˙ \n\n");
                             }
                             break;// break del case 1
 
                         case 2:
-                            JOptionPane.showMessageDialog(null, "No se ha registrado la categoria. Volviendo al menu principal...");
+                            JOptionPane.showMessageDialog(null, "No se ha registrado la categoria.\n\n                         ˙◠˙    \n\n");
                             break;// break del case 2
 
                         default://Opcion invalida 
-                            JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo \n\n                            ˙◠˙    \n\n");
+                            JOptionPane.showMessageDialog(null, "Opcion no es valida. Intentalo de nuevo. \n\n                            ˙◠˙    \n\n");
                             break;// break del default
                     }
                     break; // break del case 3
@@ -173,15 +168,14 @@ public class VentanaRegistro {
                 arregloString = arregloString + "\n " + (i + 1) + ". " + arreglo[i];
             }
         } else {
-            arregloString = "vacío";
+            arregloString = "                 No hay productos en el sistema. ˙◠˙    \n\n";
         }
         return arregloString;
     }
 
     public void AgregarProducto(Producto nuevoProducto) {
         int limite = Inventario.length; //Indice +1
-        
-        Producto[] inventarioNuevo = new Producto[limite + 1];
+        Producto[] inventarioNuevo = new Producto[limite + 1]; //crea un nuevo subarreglo con los mismo datos  del inventario solo que con un campo mas. 
         for (int i = 0; i < limite; i++) {
             inventarioNuevo[i] = Inventario[i];
         }
@@ -190,7 +184,6 @@ public class VentanaRegistro {
     }
 
     public boolean RegistrarCategoria(String nombreCategoria) {
-        
         //verifica si ya existe la categoría en el arreglo de categorías
         for (int i = 0; i < Categorias.length; i++) {
             if (nombreCategoria.equals(this.Categorias[i])) {
@@ -199,7 +192,7 @@ public class VentanaRegistro {
         }
         //si no existe , se agrega
         int limite = Categorias.length;
-        String[] nuevasCategorias = new String[limite + 1];
+        String[] nuevasCategorias = new String[limite + 1]; //crea un nuevo subarreglo con los mismo datos  de la categoria solo que con un campo mas.
         for (int i = 0; i < Categorias.length; i++) {
             nuevasCategorias[i] = this.Categorias[i];
         }
@@ -217,7 +210,7 @@ public class VentanaRegistro {
         }
         //si no existe , se agrega
         int limite = Marcas.length;
-        String[] nuevasMarcas = new String[limite + 1];
+        String[] nuevasMarcas = new String[limite + 1]; //crea un nuevo subarreglo con los mismo datos  de la marca solo que con un campo mas
         for (int i = 0; i < Marcas.length; i++) {
             nuevasMarcas[i] = this.Marcas[i];
         }

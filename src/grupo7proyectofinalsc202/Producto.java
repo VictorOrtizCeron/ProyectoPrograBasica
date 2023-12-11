@@ -1,14 +1,15 @@
 package grupo7proyectofinalsc202;
+
 public class Producto {
-    
+
+    //atributos
     private float precio;
     private String nombre;
     private String categoria;
     private String marca;
     private int cantidad;//se utiliza para manejar la cantidad de producto en venta
-    
-    
 
+    //constructor del producto
     public Producto(float precio, String nombre, String categoria, String marca) {
         this.precio = precio;
         this.nombre = nombre;
@@ -16,8 +17,28 @@ public class Producto {
         this.marca = marca;
         cantidad = 0;
     }
-    public Producto(){
+    
+    //metodos
+    public Producto() {
         cantidad = 0;
+    }
+
+    public int getCantidad() {
+        return this.cantidad;
+    }
+
+    public boolean setCantidad(int cantidad) {
+        if (cantidad > 0) {
+            this.cantidad = cantidad;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void agregarCantidad(int cantidadExtra) {
+        this.cantidad += cantidadExtra;
     }
 
     public float getPrecio() {
@@ -52,31 +73,4 @@ public class Producto {
         this.marca = marca;
     }
 
-    public int getCantidad() {
-        return this.cantidad;
-    }
-
-    public boolean setCantidad(int cantidad) {
-        
-        if(cantidad>0){
-             this.cantidad = cantidad;
-             
-             return true;
-        }
-        else{
-            return false;
-        }
-       
-    }
-    
-    public void agregarCantidad(int cantidadExtra) {
-             
-        
-             this.cantidad += cantidadExtra;  
-             
-             
-    }
-
-   
-          
-}
+} //llave de la clase 

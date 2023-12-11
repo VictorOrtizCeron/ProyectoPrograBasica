@@ -1,11 +1,13 @@
 package grupo7proyectofinalsc202;
 import javax.swing.JOptionPane;
 public class VentanaInventario {
-
+    
+    //atributos
     private Producto[] inventario;
     private String[] Categorias;
     private String[] Marcas;
-
+    
+    //Menu de inventario
     public void start() {
         int opcionInventario = 0;
 
@@ -14,7 +16,7 @@ public class VentanaInventario {
             String menuInventario = "─────── ⋆⋅⋆  ───────Menu inventario─────── ⋆⋅⋆  ───────\n\n"
                     + concatenarInventario(this.inventario) + "\n"
                     + "1.Filtrar .\n"
-                    + "2.Regresar.\n";
+                    + "2.Regresar.\n\n";
 
             opcionInventario = Integer.parseInt(JOptionPane.showInputDialog(menuInventario));
             switch (opcionInventario) {
@@ -23,8 +25,8 @@ public class VentanaInventario {
                     String subMenuCategorias
                             = "─────── ⋆ ───────Categorias disponibles─────── ⋆ ───────\n"
                             + concatenarArregloString(this.Categorias) + "\n"
-                            + (this.Categorias.length + 1) + ". Regresar"
-                            + "\nSeleccione una categoría\n";
+                            + (this.Categorias.length + 1) + ". Regresar.\n"
+                            + "\nSeleccione una categoría.\n";
                     
                     //seleccion de categoria
                     int categoriaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(subMenuCategorias));
@@ -36,7 +38,7 @@ public class VentanaInventario {
                         Producto[] filtradoCategoria = filtradoCategoria(this.Categorias[categoriaSeleccionada - 1], this.inventario);
                         
                         //lista de productos filtrados desplegada
-                        String menuFiltradoPorCategoria = "─────── ⋆ ─────── Resultados de filtrado por Categoría ─────── ⋆ ───────\n\n"
+                        String menuFiltradoPorCategoria = "─────── ⋆ ─────── Resultados de filtrado por Categoría ─────── ⋆ ───────\n"
                                 + concatenarInventario(filtradoCategoria) + "\n"
                                 + "1. Filtrar por marca.\n"
                                 + "2. Regresar.\n";
@@ -47,10 +49,10 @@ public class VentanaInventario {
 
                             case 1:
                                 
-                                String marcasConcatenacion = "─────── ⋆ ─────── Marcas registradas ─────── ⋆ ───────: \n"+
+                                String marcasConcatenacion = "─────── ⋆ ─────── Marcas registradas ─────── ⋆ ───────\n"+
                                         concatenarArregloString(this.Marcas)+
-                                        "\nSeleccione una de las marcas disponibles\n"+
-                                        (this.Marcas.length+1)+". Regresar";
+                                        +(this.Marcas.length+1)+". Regresar.\n"
+                                        +"\nSeleccione una de las marcas disponibles\n";
                                 
                                 
                                 int marcaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog(marcasConcatenacion));
@@ -61,7 +63,7 @@ public class VentanaInventario {
                                     
                                     Producto[] filtradoMarca = filtradoMarca(this.Marcas[marcaSeleccionada - 1], filtradoCategoria);
                                     
-                                    String menuFiltradoFinal = "─────── ⋆ ─────── Resultados de filtrado por categoría y marca ─────── ⋆ ───────\n\n"
+                                    String menuFiltradoFinal = "─────── ⋆ ─────── Resultados de filtrado por categoría y marca ─────── ⋆ ───────\n"
                                             + concatenarInventario(filtradoMarca) + "\n";
                                     
                                     JOptionPane.showMessageDialog(null,menuFiltradoFinal);
@@ -101,7 +103,8 @@ public class VentanaInventario {
             }
         }
     }
-
+    
+    //metodos
     public Producto[] filtradoCategoria(String filtro, Producto[] listaProductos) {
         Producto[] inventarioFiltrado = new Producto[0];
 
@@ -153,7 +156,7 @@ public class VentanaInventario {
                         + productos[i].getMarca() + "\n";
             }
         } else {
-            inventarioString = "vacío";
+            inventarioString = "\n                                        No hay productos en el sistema. ˙◠˙    \n\n";
         }
         return inventarioString;
     }
@@ -167,7 +170,7 @@ public class VentanaInventario {
                 arregloString = arregloString + "\n " + (i + 1) + ". " + arreglo[i];
             }
         } else {
-            arregloString = "vacío";
+            arregloString = "\n                                        No hay productos en el sistema. ˙◠˙    \n\n";
         }
         return arregloString;
     }
